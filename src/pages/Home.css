@@ -1,0 +1,84 @@
+/* =======================================================
+   ESTILOS PARA HOME.JSX
+   ======================================================= */
+
+/* 1. Estilo para el contenedor de fondo (Hero Section) */
+.home-hero-section {
+    position: relative; 
+    height: 100vh; /* Ocupa toda la altura de la vista */
+    width: 100vw;
+    /* 🛑 Reemplaza con la ruta de tu imagen de banner */
+    background-image: url('https://www.shutterstock.com/image-photo/medicinal-herbs-tinctures-alternative-medicine-260nw-2230589719.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Opcional: efecto paralaje sutil */
+    
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido (texto/botones) */
+    align-items: center;
+    color: white; 
+    text-align: center;
+    overflow: hidden; 
+    z-index: 1;
+}
+
+.home-hero-section::before {
+    content: ''; /* Es obligatorio para pseudo-elementos */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 128, 0, 0.4); /* 👈 VERDE (RGB 0,128,0) con 40% de opacidad */
+    z-index: 0; /* Asegura que el filtro esté debajo del contenido y el Navbar */
+}
+/* 2. Estilos para el texto y botones dentro del Hero */
+.hero-content {
+    margin-top: 100px; /* Para asegurar que no quede detrás del Navbar */
+    padding: 20px;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem; 
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para que se vea sobre el fondo */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.button-group button {
+    padding: 12px 25px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 30px; 
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button-group .primary-button {
+    background-color: #4CAF50; 
+    color: white;
+}
+
+.button-group .secondary-button {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* 3. Estilos para el resto del contenido de la página */
+.home-content {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff; /* Fondo blanco para el resto de la página */
+}

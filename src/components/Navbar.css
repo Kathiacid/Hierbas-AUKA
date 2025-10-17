@@ -1,0 +1,87 @@
+/* =======================================================
+   ESTILOS BASE DEL NAVBAR (USADO EN TODAS LAS PÁGINAS MENOS HOME)
+   ======================================================= */
+.header {
+    background-color: #20B2AA; /* Color por defecto */
+    color: white; 
+    width: 100%;
+    position: fixed; /* Por defecto es fijo */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 80px; 
+    display: flex; /* Para centrar contenido */
+    align-items: center;
+}
+
+/* Contenedor interno que centra el contenido */
+.header-main {
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.desktop-menu-category-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px; /* Espacio entre los items */
+}
+
+/* =======================================================
+   ESTILO ESPECIAL: FLOATING NAVBAR (USADO SOLO EN HOME.JSX)
+   ======================================================= */
+.header.floating-navbar { 
+    /* Efecto Glassmorphism */
+    background-color: rgba(255, 255, 255, 0.15); /* Semi-transparente */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px; 
+    
+    width: 80%; 
+    max-width: 960px; 
+    height: 60px; /* Un poco más pequeño para el efecto píldora */
+    padding: 0 30px; /* Relleno solo horizontal */
+    
+    position: absolute; /* 🛑 ES ABSOLUTO para flotar sobre el hero */
+    top: 30px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    z-index: 1000; 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+}
+
+/* Asegura que los enlaces y el logo sigan siendo visibles */
+.header.floating-navbar a {
+    color: white;
+    font-weight: 500;
+}
+.header.floating-navbar .header-logo h2 {
+    color: white;
+}
+
+/* Asegura que los contenedores internos no rompan el estilo flotante */
+.header.floating-navbar .header-main,
+.header.floating-navbar .container {
+    width: 100%;
+    max-width: 100%; 
+    padding: 0; 
+}
