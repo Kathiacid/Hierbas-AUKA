@@ -1,0 +1,113 @@
+/* src/components/ReelsCarrusel.css */
+
+.reels-carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px; /* Ancho total del componente */
+    height: 550px; /* Altura total del componente */
+    margin: 40px auto;
+}
+
+.reel-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.reel-card {
+    /* Formato vertical como un Reel/Historia */
+    width: 300px; 
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.reel-card:hover {
+    transform: scale(1.02);
+}
+
+/* ------------------------------------- */
+/* Flechas de Navegación */
+/* ------------------------------------- */
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.nav-arrow:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.nav-arrow.left {
+    left: 0;
+}
+
+.nav-arrow.right {
+    right: 0;
+}
+
+/* ------------------------------------- */
+/* Información Interna del Reel */
+/* ------------------------------------- */
+
+.reel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Capa oscura sobre la imagen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-icon {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.reel-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+}
+
+.reel-author {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.reel-rating .fa-star {
+    color: gold; /* Estrellas llenas */
+    margin-right: 2px;
+}
+
+.reel-rating .far {
+    color: rgba(255, 255, 255, 0.4); /* Estrellas vacías (contorno) */
+}

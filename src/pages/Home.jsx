@@ -1,17 +1,16 @@
-// src/pages/Home.jsx
 
-// src/pages/Home.jsx
 
 import React from 'react';
 import Navbar from '../components/Navbar'; 
-import "./Home.css"; // Estilos para la sección Hero
+import "./Home.css"; 
 import { Link } from 'react-router-dom';
-import AukaProfileImg from '../assets/profileauka.jpg' 
+import ProductCarrusel from '../components/ProductCarrusel';
+import ReelsCarrusel from '../components/ReelsCarrusel'; // Componente del carrusel de videos
 
 export default function Home() {
     return (
         <div>
-            {/* Barra de ofertas deslizante (Marquee) */}
+            {/* 1. BARRA DE OFERTAS (MARQUEE) */}
             <div className="ofertas-barra">
                 <div className="marquee-content">
                     {/* Contenido duplicado para un loop continuo */}
@@ -24,13 +23,10 @@ export default function Home() {
                 </div>
             </div>
             
-            {/* SECCIÓN HERO: Contenedor con la imagen de fondo */}
+            {/* 2. SECCIÓN HERO (BANNER PRINCIPAL) */}
             <div className="home-hero-section"> 
-                {/* Navbar */}
-                {/* Nota: Pasar una clase al Navbar requiere que el Navbar lo acepte como prop */}
                 <Navbar className="floating-navbar" /> 
                 
-                {/* Contenido principal del banner */}
                 <div className="hero-content">
                     <h1>Bienvenido a AUKA terapias</h1>
                     <p>Hierbas medicinales y cosmética natural para tu bienestar.</p>
@@ -41,11 +37,13 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Resto del contenido de la página Home */}
-            <main className="home-content">
+            {/* 3. CONTENIDO PRINCIPAL (MAIN) */}
+            <section className="home-content">
+                
                 <h1>Conoce nuestros productos</h1>
+                
+                {/* 3.1. SECCIÓN DE TARJETAS DE CATEGORÍAS */}
                 <section className='tarjetas'>
-                    {/* Tarjetas de categorías */}
                     <div className='tarjeta-categoria' id="tarjeta1">
                         <h2>Cosmetica</h2>
                         <p>Descricpion bla bla</p>
@@ -63,10 +61,13 @@ export default function Home() {
                     </div> 
                 </section>
                 
-                <section className='section2'>
-                    {/* Sección de Instagram: IMAGEN CORREGIDA */}
-                    <div className='instagram'>
-                        <a
+            </section>
+            <section className='section2'>
+                
+                <div className='instagram'>
+
+                    <div className="instagram-profile-block">
+                        <a 
                             href="https://www.instagram.com/auka_terapias/?hl=es" 
                             target="_blank" 
                             rel="noopener noreferrer"
@@ -74,56 +75,34 @@ export default function Home() {
                         >
                             Síguenos en Instagram
                         </a>
-                        
-                        <a href="https://www.instagram.com/auka_terapias/?hl=es" target="_blank" rel="noopener noreferrer">
-                            <img src={AukaProfileImg} alt="Perfil de Instagram AUKA" />
-                        </a>
+
                     </div>
+
+                    <div className="reels-mover"> 
+                        <ReelsCarrusel />
+                    </div>
+                </div>
+                <div className='blog'>
+                    <h2>Blog</h2>
+                    <p>Explora nuestros últimos posts, consejos sobre bienestar, las propiedades de la cosmética natural y las hierbas medicinales.</p>
+                    <Link to="/blog">Ver todo</Link>
                     
-                    {/* Sección del Blog con GRID 2x2 */}
-                    <div className='blog'>
-                        <h2>Blog</h2>
-                        <p>Explora nuestros últimos posts, consejos sobre bienestar, las propiedades de la cosmética natural y las hierbas medicinales.</p>
-                        <Link to="/blog">Ver todo</Link>
-                        
-                        {/* CONTENEDOR DEL GRID 2x2 */}
-                        <div className='grid-blog'>
-                            <div className='tarjeta-blog'>
-                                <img src="/ruta/imagen-blog-1.jpg" alt="Post de blog 1" />
-                                <p>Descricpion bla bla</p>
-                                <Link to="/blog/post1">Ver más</Link>
-                            </div>
-                            <div className='tarjeta-blog'>
-                                <img src="/ruta/imagen-blog-2.jpg" alt="Post de blog 2" />
-                                <p>Descricpion bla bla</p>
-                                <Link to="/blog/post2">Ver más</Link>
-                            </div>
-                            <div className='tarjeta-blog'>
-                                <img src="/ruta/imagen-blog-3.jpg" alt="Post de blog 3" />
-                                <p>Descricpion bla bla</p>
-                                <Link to="/blog/post3">Ver más</Link>
-                            </div>
-                            <div className='tarjeta-blog'>
-                                <img src="/ruta/imagen-blog-4.jpg" alt="Post de blog 4" />
-                                <p>Descricpion bla bla</p>
-                                <Link to="/blog/post4">Ver más</Link>
-                            </div>
-                        </div>
+                    <div className='grid-blog'>
+                        <div className='tarjeta-blog'><img src="/ruta/imagen-blog-1.jpg" alt="Post de blog 1" /><p>Descricpion bla bla</p><Link to="/blog/post1">Ver más</Link></div>
+                        <div className='tarjeta-blog'><img src="/ruta/imagen-blog-2.jpg" alt="Post de blog 2" /><p>Descricpion bla bla</p><Link to="/blog/post2">Ver más</Link></div>
+                        <div className='tarjeta-blog'><img src="/ruta/imagen-blog-3.jpg" alt="Post de blog 3" /><p>Descricpion bla bla</p><Link to="/blog/post3">Ver más</Link></div>
+                        <div className='tarjeta-blog'><img src="/ruta/imagen-blog-4.jpg" alt="Post de blog 4" /><p>Descricpion bla bla</p><Link to="/blog/post4">Ver más</Link></div>
                     </div>
-                </section>
+                </div>
+            </section>
                 
-                <section className='destacados'>
-                    <div className="carousel-destacados">
-                        <h2 className="title">Productos Destacados</h2>
-                        {/* <ProductCarousel />*/} 
-                    </div>
-                </section>
-                <div class="instagram-feed-container">
-    <script src="https://snapwidget.com/js/snapwidget.js"></script>
-    
-</div>
                 
-            </main>
+            <section className='destacados'>
+                <div className="carousel-destacados">
+                    <h2 className="title">Productos Destacados</h2>
+                    <ProductCarrusel/>
+                </div>
+            </section>
         </div>
     );
 }

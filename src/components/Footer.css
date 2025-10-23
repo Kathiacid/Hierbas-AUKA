@@ -1,0 +1,162 @@
+/* src/components/Footer.css */
+
+footer {
+    width: 100%;
+    /* Fondo principal blanco/claro */
+    font-family: Arial, sans-serif;
+}
+
+.footer-main-content {
+    display: flex;
+    justify-content: space-between;
+    /* Ajusta el ancho máximo para el contenido central */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 30px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    
+}
+
+.footer-column {
+    padding: 0 20px;
+}
+
+/* ----------------------------------- */
+/* Columna 1: Logo */
+/* ----------------------------------- */
+.logo-column {
+    flex-basis: 25%;
+    max-width: 25%;
+    /* Fondo que imita la caja de la izquierda */
+    background-color: #BDB492; 
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-logo img {
+    max-width: 100%;
+    height: auto;
+    /* Estilos para el texto "Mundo Fungi" si fuera texto: */
+    /* font-size: 2.5rem; color: white; font-weight: bold; */
+}
+
+/* ----------------------------------- */
+/* Columna 2: Links */
+/* ----------------------------------- */
+.links-column {
+    flex-basis: 35%;
+}
+
+.links-column h3 {
+    color: #4CAF50; /* Título verde */
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.links-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.links-column li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.links-column li a {
+    color: #444;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.links-column li a:hover {
+    color: #4CAF50;
+}
+
+.icon-bullet {
+    /* Estilo del punto verde */
+    color: #4CAF50; 
+    font-size: 0.6rem;
+    margin-right: 10px;
+    margin-top: 5px; /* Ajuste fino vertical */
+}
+
+/* ----------------------------------- */
+/* Columna 3: Contacto */
+/* ----------------------------------- */
+.contact-column {
+    flex-basis: 40%;
+}
+
+.contact-column h3 {
+    color: #444;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    color: #4CAF50; /* Color verde para íconos */
+}
+
+.contact-item .contact-icon {
+    font-size: 1.1rem;
+    margin-right: 15px;
+    /* Ajuste para alinear con la primera línea de texto */
+    padding-top: 2px; 
+}
+
+.contact-item p {
+    margin: 0;
+    color: #666;
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+/* ----------------------------------- */
+/* Barra Inferior */
+/* ----------------------------------- */
+.footer-bottom-bar {
+    background-color: #4CAF50; /* Fondo verde fuerte */
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+}
+
+.footer-bottom-bar p {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* ----------------------------------- */
+/* Responsividad */
+/* ----------------------------------- */
+@media (max-width: 900px) {
+    .footer-main-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-column {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-bottom: 30px;
+        text-align: center;
+        padding: 0;
+    }
+    
+    .links-column ul, .contact-column .contact-item {
+        /* Centra el contenido de los links y contacto en móvil */
+        justify-content: center;
+    }
+}
