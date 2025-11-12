@@ -1,92 +1,55 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
-import "./Navbar.css"; 
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import './Navbar.css'; // 
 
-// Acepta la prop 'className' para estilos condicionales
-export default function Navbar({ className }) { 
-    const navigate = useNavigate();
-    const [busqueda, setBusqueda] = useState(""); 
+export default function Navbar() {
+  return (
+    <header className="navbar-container">
+      
+      {/* 1. Logo (Izquierda) */}
+      <div className="navbar-logo">
+        <Link to="/">
+          🍃 <h2>AUKA</h2>
+        </Link>
+      </div>
 
-    const navegarARuta = (ruta) => {
-        navigate(ruta);
-    };
+      {/* 2. Links de Navegación (Centro) */}
+      <nav className="navbar-links">
+        <ul>
+          <li>
 
-    const manejarSubmit = (e) => {
-        e.preventDefault(); 
-        if (busqueda.trim() !== "") {
-            navigate(`/catalogo?search=${busqueda}`);
-            setBusqueda("");
-        }
-    };
-    
-    // Combina la clase base 'header' con la clase recibida (ej: 'floating-navbar')
-    const finalHeaderClass = `header ${className || ''}`.trim();
+            <NavLink to="/" end>Inicio</NavLink>
+          </li>
+          <li>
+            <NavLink to="/cosmetica">Cosmetica</NavLink>
+          </li>
+          <li>
+            <NavLink to="/medicinal">Medicinal</NavLink>
+          </li>
+          <li>
+            <NavLink to="/servicios">Servicios</NavLink>
+          </li>
+          <li>
+            <NavLink to="/blog">Blog</NavLink>
+          </li>
+          <li>
+            <NavLink to="/sobrenosotros">Sobre Nosotros</NavLink>
+          </li>
+        </ul>
+      </nav>
 
-    return (
-        <header className={finalHeaderClass}>
-            <div className="header-main">
-                <div className="container">
-                    {/* Logo */}
-                    <Link to="/" className="header-logo">
-                        <h2>AUKA</h2>
-                    </Link>
+      {/* 3. Búsqueda y Carrito (Derecha) */}
+      <div className="navbar-right">
+        
+        {/* Barra de Búsqueda */}
+        <div className="navbar-search">
+          <input type="text" placeholder="Buscar productos..." />
+          {/* Asegúrate de tener Font Awesome */}
+          <i className="fas fa-search"></i>
+        </div>
 
-                    {/* Navegación Desktop */}
-                    <nav className="desktop-navigation-menu">
-                        <ul className="desktop-menu-category-list">
-                            
-                            {/* 1. INICIO */}
-                            <li className="menu-category">
-                                <Link to="/" className="menu-title"><span className="nav-text">Inicio</span></Link>
-                            </li>
 
-                            {/* 2. COSMETICA */}
-                            <li className="menu-category">
-                                <Link to="/cosmetica" className="menu-title">
-                                    <span className="nav-text">Cosmetica</span>
-                                </Link>
-                            </li>
-
-                            {/* 3. MEDICINAL.JSX */}
-                            <li className="menu-category">
-                                <Link to="/medicinal" className="menu-title">
-                                    <span className="nav-text">Medicinal</span>
-                                </Link>
-                            </li>
-
-                            {/* 4. BLOG.JSX */}
-                            <li className="menu-category">
-                                <Link to="/blog" className="menu-title">
-                                    <span className="nav-text">Blog</span>
-                                </Link>
-                            </li>
-
-                            {/* 5. SOBRENOSOTROS.JSX */}
-                            <li className="menu-category">
-                                <Link to="/sobrenosotros" className="menu-title">
-                                    <span className="nav-text">Sobre Nosotros</span>
-                                </Link>
-                            </li>
-
-                            {/* Formulario de búsqueda (si lo deseas) */}
-                            <div className="header-search-container">
-                                <form onSubmit={manejarSubmit}>
-                                    <input
-                                        type="text"
-                                        className="search-field"
-                                        placeholder="Buscar productos..."
-                                        value={busqueda}
-                                        onChange={(e) => setBusqueda(e.target.value)}
-                                    />
-                                    <button type="submit" className="search-btn">
-                                        <i className="fas fa-search"></i>
-                                    </button>
-                                </form>
-                            </div> */
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-    );
+      </div>
+    </header>
+  );
 }

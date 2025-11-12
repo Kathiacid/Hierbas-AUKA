@@ -2,7 +2,7 @@
 .home-hero-section {
     position: relative; 
     height: 100vh; /* Ocupa toda la altura de la vista */
-    width: 99vw;
+    width: 100%;
     /* 🛑 Reemplaza con la ruta de tu imagen de banner */
     background-image: url('https://www.shutterstock.com/image-photo/medicinal-herbs-tinctures-alternative-medicine-260nw-2230589719.jpg'); 
     background-size: cover;
@@ -154,6 +154,7 @@
     width: 100%;
     justify-content: center;
     gap:50px;
+    
 
 
 }
@@ -187,14 +188,41 @@ border: 1px solid pink;
     gap:5px;
 
 }
-.tarjeta-blog{
-    border: 2px dotted grey;
-    width: 500px;
-    height: 300px;
-    display: flex;
-}
 
 .destacados{
     width: 100%;
 
+}
+.tarjeta-blog {
+    width: 100%; 
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px; /* Este padding YA es el "recuadro" para todo */
+    align-items: center; 
+}
+
+.tarjeta-blog img {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    
+    margin-bottom: 15px; 
+}
+
+.tarjeta-blog p {
+    line-height: 1.5em; 
+    height: 4.5em; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+.tarjeta-blog p::after {
+    content: "";
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    height: 1.5em; 
+    background: linear-gradient(to bottom, transparent, white);
 }

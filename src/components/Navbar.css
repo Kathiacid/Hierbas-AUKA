@@ -1,87 +1,124 @@
-/* =======================================================
-   ESTILOS BASE DEL NAVBAR (USADO EN TODAS LAS PÁGINAS MENOS HOME)
-   ======================================================= */
-.header {
-    background-color: #20B2AA; /* Color por defecto */
-    color: white; 
-    width: 100%;
-    position: fixed; /* Por defecto es fijo */
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 80px; 
-    display: flex; /* Para centrar contenido */
-    align-items: center;
+/* 1. Contenedor Principal */
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* ¡Magia! Separa los 3 bloques */
+  align-items: center;
+  padding: 15px 40px; /* Espaciado interno */
+  background-color: #ffffff; /* Fondo blanco */
+  border-bottom: 1px solid #f0f0f0; /* Línea sutil abajo */
+  width: 100%;
+  box-sizing: border-box; /* Importante para que el padding no cause scroll */
 }
 
-/* Contenedor interno que centra el contenido */
-.header-main {
-    width: 100%;
+/* 2. Logo (Izquierda) */
+.navbar-logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.navbar-logo h2 {
+  margin: 0;
+  margin-left: 8px; /* Espacio entre el ícono 🍃 y el texto */
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-.header a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
+/* 3. Links de Navegación (Centro) */
+.navbar-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px; /* Espacio entre cada link */
 }
 
-.desktop-menu-category-list {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    gap: 20px; /* Espacio entre los items */
+.navbar-links a {
+  text-decoration: none;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
-/* =======================================================
-   ESTILO ESPECIAL: FLOATING NAVBAR (USADO SOLO EN HOME.JSX)
-   ======================================================= */
-.header.floating-navbar { 
-    /* Efecto Glassmorphism */
-    background-color: rgba(255, 255, 255, 0.15); /* Semi-transparente */
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
-    
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50px; 
-    
-    width: 80%; 
-    max-width: 960px; 
-    height: 60px; /* Un poco más pequeño para el efecto píldora */
-    padding: 0 30px; /* Relleno solo horizontal */
-    
-    position: absolute; /* 🛑 ES ABSOLUTO para flotar sobre el hero */
-    top: 30px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    
-    z-index: 1000; 
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+/* El estilo de la página activa (como 'Productos' en verde en tu foto) */
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: #5a8a66; /* El verde de tu logo */
+  border-bottom: 2px solid #5a8a66;
 }
 
-/* Asegura que los enlaces y el logo sigan siendo visibles */
-.header.floating-navbar a {
-    color: white;
-    font-weight: 500;
-}
-.header.floating-navbar .header-logo h2 {
-    color: white;
+/* 4. Lado Derecho (Búsqueda y Carrito) */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre la búsqueda y el carrito */
 }
 
-/* Asegura que los contenedores internos no rompan el estilo flotante */
-.header.floating-navbar .header-main,
-.header.floating-navbar .container {
-    width: 100%;
-    max-width: 100%; 
-    padding: 0; 
+/* 5. Barra de Búsqueda (Como en la foto) */
+.navbar-search {
+  position: relative;
+}
+
+.navbar-search input {
+  border: 1px solid #e0e0e0;
+  /* El color beige claro de tu foto */
+  background-color: #f7f6f2; 
+  border-radius: 50px; /* Muy redondeado */
+  padding: 10px 40px 10px 20px; /* Espacio para el ícono */
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.navbar-search input:focus {
+  border-color: #5a8a66;
+}
+
+/* Posicionamiento del ícono de lupa */
+.navbar-search i {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+/* 6. Botón de Carrito (Como en la foto) */
+.navbar-cart-btn {
+  position: relative;
+  background-color: #f7f6f2; /* Mismo beige */
+  border: none;
+  border-radius: 50%; /* Círculo perfecto */
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-cart-btn i {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* 7. Badge de Notificación (Naranja) */
+.cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: #f39c12; /* Naranja */
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1; /* Ajuste para centrar el número */
 }

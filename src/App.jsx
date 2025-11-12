@@ -9,15 +9,14 @@ import Medicinal from './pages/Medicinal.jsx';
 import SobreNosotros from './pages/SobreNosotros.jsx';
 import Cosmetica from './pages/Cosmetica.jsx'; 
 import ProductoDetalle from './pages/ProductoDetalle.jsx'; 
-
-// 🚨 Asegúrate de que Navbar y Footer existan en tu carpeta components
+import Servicios from './pages/Servicios.jsx';
 import Navbar from './components/Navbar.jsx'; 
 import Footer from './components/Footer.jsx'; 
 
 function App() {
   return (
     <BrowserRouter>
-
+    <Navbar/>
       <main>
         <Routes>
           {/* Todas tus rutas van aquí */}
@@ -26,6 +25,7 @@ function App() {
           <Route path="/medicinal" element={<Medicinal />} />
           <Route path="/cosmetica" element={<Cosmetica />} />
           <Route path="/sobrenosotros" element={<SobreNosotros />} />
+          <Route path="/servicios" element={<Servicios />} />
           <Route path="/producto/:id" element={<ProductoDetalle />} /> 
           <Route path="*" element={<h1>404: Página no encontrada</h1>} />
         </Routes>

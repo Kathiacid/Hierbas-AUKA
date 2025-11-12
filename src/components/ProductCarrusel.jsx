@@ -10,7 +10,7 @@ const DUMMY_PRODUCTS = [
         producto: 1, 
         producto_precio: 12500, 
         old_price: 15000, 
-        producto_imagen: "https://images.unsplash.com/photo-1543353071-88f5f458632e?q=80&w=1770&auto=format&fit=crop",
+        producto_imagen: "https://m.media-amazon.com/images/I/91nXhP8FrCL.jpg",
         producto_descripcion: "Té orgánico de menta, perfecto para la digestión y la relajación.",
         rating: 4, offer: true, rating_count: 12
     },
@@ -20,7 +20,7 @@ const DUMMY_PRODUCTS = [
         producto: 2, 
         producto_precio: 18000, 
         old_price: null, 
-        producto_imagen: "https://images.unsplash.com/photo-1580226291662-df8d9333a3b3?q=80&w=1770&auto=format&fit=crop",
+        producto_imagen: "https://i0.wp.com/www.rinconsilvestre.net/wp-content/uploads/2019/11/foto2_c.ca_-scaled.jpg?fit=2560%2C1920&ssl=1",
         producto_descripcion: "Crema hidratante natural ideal para pieles sensibles y secas.",
         rating: 5, offer: false, rating_count: 25
     },
@@ -30,7 +30,7 @@ const DUMMY_PRODUCTS = [
         producto: 3, 
         producto_precio: 9500, 
         old_price: 11000, 
-        producto_imagen: "https://images.unsplash.com/photo-1627885444654-e0af0f19c0f9?q=80&w=1770&auto=format&fit=crop",
+        producto_imagen: "https://almayun.cl/cdn/shop/products/backgrounderaser_1651957599.jpg?v=1664723053&width=1214",
         producto_descripcion: "Aceite puro de jojoba, excelente para el cabello y el cuerpo.",
         rating: 4, offer: true, rating_count: 8
     },
@@ -40,7 +40,7 @@ const DUMMY_PRODUCTS = [
         producto: 4, 
         producto_precio: 7200, 
         old_price: null, 
-        producto_imagen: "https://images.unsplash.com/photo-1556911220-4e44f0b2f153?q=80&w=1770&auto=format&fit=crop",
+        producto_imagen: "https://http2.mlstatic.com/D_NQ_NP_714698-MLC85865214116_062025-O-jabon-de-carbon-activado-para-limpieza-de-la-piel-1unid.webp",
         producto_descripcion: "Jabón desintoxicante profundo, especial para pieles grasas.",
         rating: 5, offer: false, rating_count: 40
     },
@@ -50,7 +50,7 @@ const DUMMY_PRODUCTS = [
         producto: 5, 
         producto_precio: 45000, 
         old_price: 50000, 
-        producto_imagen: "https://images.unsplash.com/photo-1557022130-9080b4356e6d?q=80&w=1770&auto=format&fit=crop",
+        producto_imagen: "https://lacasadelmasajista.com/server/Portal_0000410_0036316/img/products/set-60-piedras-calientes-de-basalto_26723.jpg",
         producto_descripcion: "Kit completo de piedras volcánicas para terapia de calor.",
         rating: 3, offer: true, rating_count: 15
     },
