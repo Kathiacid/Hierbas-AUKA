@@ -1,17 +1,15 @@
 
 .home-hero-section {
     position: relative; 
-    height: 100vh; /* Ocupa toda la altura de la vista */
+    height: 100vh; 
     width: 100%;
-    /* 🛑 Reemplaza con la ruta de tu imagen de banner */
-    background-image: url('https://www.shutterstock.com/image-photo/medicinal-herbs-tinctures-alternative-medicine-260nw-2230589719.jpg'); 
+    background-image: url('https://static.vecteezy.com/system/resources/previews/061/901/049/large_2x/natural-cosmetic-products-and-herbs-ingredients-for-skincare-body-and-hair-treatment-laying-on-a-gray-background-photo.jpg'); 
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Opcional: efecto paralaje sutil */
-    
+    background-attachment: fixed;
     display: flex; 
     flex-direction: column;
-    justify-content: center; /* Centra el contenido (texto/botones) */
+    justify-content: center; 
     align-items: center;
     color: white; 
     text-align: center;
@@ -20,18 +18,18 @@
 }
 
 .home-hero-section::before {
-    content: ''; /* Es obligatorio para pseudo-elementos */
+    content: ''; 
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 128, 0, 0.4); /* 👈 VERDE (RGB 0,128,0) con 40% de opacidad */
-    z-index: 0; /* Asegura que el filtro esté debajo del contenido y el Navbar */
+    background-color: rgba(0, 128, 0, 0.4); 
 }
-/* 2. Estilos para el texto y botones dentro del Hero */
+
+
 .hero-content {
-    margin-top: 100px; /* Para asegurar que no quede detrás del Navbar */
+    margin-top: 100px; 
     padding: 20px;
     z-index: 2;
 }
@@ -39,7 +37,7 @@
 .hero-content h1 {
     font-size: 3.5rem; 
     margin-bottom: 20px;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para que se vea sobre el fondo */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
 }
 
 .hero-content p {
@@ -71,23 +69,27 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-/* 3. Estilos para el resto del contenido de la página */
+
 .home-content {
     padding: 50px 20px;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #fff; /* Fondo blanco para el resto de la página */
+    background-color: #fff; 
 }
 
-/* 1. Ajuste de Keyframes: El contenido se mueve el doble de lejos */
+.home-content h1 {
+    margin-bottom: 50px;
+
+}
+
+
 @keyframes scrolling {
-    /* Comienza fuera de la pantalla a la derecha */
+    
     0% { transform: translateX(0%); } 
-    /* Termina después de que todo el contenido (el original + el duplicado) haya pasado */
     100% { transform: translateX(-50%); } 
 }
 
-/* 2. Estilos de la barra contenedora */
+
 .ofertas-barra {
     background-color: #c6e07d; 
     color: white;
@@ -97,17 +99,14 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 3. Estilos y aplicación de la animación al contenido */
+
 .marquee-content {
-    /* Aquí se define la velocidad (ej: 15 segundos) y el bucle */
     animation: scrolling 20s linear infinite; 
-    
-    /* Configuración para que el contenido fluya en una sola línea */
     display: inline-block; 
     width: 99vw;
 }
 
-/* Estilos para los mensajes individuales */
+
 .marquee-content span {
     margin-right: 50px; 
     font-weight: bold;
@@ -124,28 +123,31 @@
     justify-content:center ;
 }
 
-.tarjeta-categoria{
-    border: 1px solid grey;
+.tarjeta-categoria {
+    border: 2px solid #D7DBCB;
     padding: 2px;
-    justify-items: center;
+    justify-content: center;
+    border-radius: 20px;
     height: 500px;
     width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+.tarjeta-categoria i {
+    color: #618814;
+}
+.tarjeta-categoria p{
+    color: #7A7A7A
+}
+.tarjeta-categoria a {
+    margin-top:15px ;
+    border: 2.5px solid #818A6F86;
+    border-radius: 20px;
+    width: 200px;
+    text-align: center;
 }
 
-#tarjeta1{
-    background-image: url(https://brownonline.com.ar/wp-content/uploads/2024/07/cosmetica-natural.jpg);
-    
-}
-
-#tarjeta2{
-    background-image: url(https://allikay.cl/wp-content/uploads/2023/07/2041039504ng001.png);
-    
-}
-
-#tarjeta3{
-    background-image: url(https://dramonicaportilla.com/wp-content/uploads/2018/01/terapias-naturales-cirugia-plastica-4-1024x683.jpg);
-    
-}
 
 .section2{
     display: flex;
@@ -226,3 +228,4 @@ border: 1px solid pink;
     height: 1.5em; 
     background: linear-gradient(to bottom, transparent, white);
 }
+

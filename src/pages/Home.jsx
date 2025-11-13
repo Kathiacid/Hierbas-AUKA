@@ -1,19 +1,12 @@
-
-
-import React from 'react';
-import Navbar from '../components/Navbar'; 
 import "./Home.css"; 
 import { Link } from 'react-router-dom';
 import ProductCarrusel from '../components/ProductCarrusel';
-import ReelsCarrusel from '../components/ReelsCarrusel'; // Componente del carrusel de videos
-
+import ReelsCarrusel from '../components/ReelsCarrusel'; 
 export default function Home() {
     return (
         <div>
-            {/* 1. BARRA DE OFERTAS (MARQUEE) */}
             <div className="ofertas-barra">
                 <div className="marquee-content">
-                    {/* Contenido duplicado para un loop continuo */}
                     <span>🛒 ¡Pregunta ya por la disponibilidad de tu producto favorito!</span>
                     <span>🔥 5% de descuento en compras sobre $30.000</span>
                     <span>🎉 Nuevos productos ya disponibles en Cosmetica.</span>
@@ -23,7 +16,7 @@ export default function Home() {
                 </div>
             </div>
             
-            {/* 2. SECCIÓN HERO (BANNER PRINCIPAL) */}
+
             <div className="home-hero-section"> 
                 
                 <div className="hero-content">
@@ -36,26 +29,27 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* 3. CONTENIDO PRINCIPAL (MAIN) */}
+
             <section className="home-content">
-                
                 <h1>Conoce nuestros productos</h1>
                 
-                {/* 3.1. SECCIÓN DE TARJETAS DE CATEGORÍAS */}
                 <section className='tarjetas'>
                     <div className='tarjeta-categoria' id="tarjeta1">
+                        <i class="fas fa-seedling fa-2x"></i>
                         <h2>Cosmetica</h2>
-                        <p>Descricpion bla bla</p>
+                        <p>Redescubre tu belleza con el poder de la naturaleza. Nuestra línea cosmética, libre de químicos, utiliza ingredientes puros y orgánicos.</p>
                         <Link to="/catalogo-completo?categoria=cosmetica">Ver más</Link>
                     </div>
                     <div className='tarjeta-categoria' id="tarjeta2">
+                        <i class="fas fa-leaf fa-2x"></i>
                         <h2>Medicinal</h2>
-                        <p>Descricpion bla bla</p>
+                        <p>Conecta con la sabiduría ancestral de la tierra. Nuestra selección medicinal ofrece remedios herbales puros, tinturas e infusiones.</p>
                         <Link to="/catalogo-completo?categoria=medicinal">Ver más</Link>
                     </div>
                     <div className='tarjeta-categoria' id="tarjeta3">
-                        <h2>Masaje Terapéutico</h2>
-                        <p>Descricpion bla bla</p>
+                        <i class="fas fa-users fa-2x"></i>
+                        <h2>Servicios</h2>
+                        <p>Tu bienestar es integral. Te invitamos a descubrir nuestros servicios terapéuticos, desde masajes descontracturantes hasta sesiones de reiki.</p>
                         <Link to="/catalogo-completo?categoria=masajes">Ver más</Link>
                     </div> 
                 </section>
