@@ -1,8 +1,5 @@
-// src/App.jsx
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-// Importar tus componentes de Página
 import Home from './pages/home.jsx';
 import Blog from './pages/Blog.jsx';
 import Medicinal from './pages/Medicinal.jsx';
@@ -30,8 +27,6 @@ function App() {
           <Route path="*" element={<h1>404: Página no encontrada</h1>} />
         </Routes>
       </main>
-
-      {/* 2. FOOTER: Visible en todas las páginas (va después de <main>) */}
       <Footer /> 
     </BrowserRouter>
   );

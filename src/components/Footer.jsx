@@ -51,7 +51,7 @@ const Footer = () => {
             
             {/* Barra Inferior de Derechos de Autor */}
             <div className="footer-bottom-bar">
-                <p>APIYERBAS © 2025 | TODOS LOS DERECHOS RESERVADOS | DESARROLLADO POR DAAT DIGITAL</p>
+                <p>AUKATERAPIAS © 2025 | TODOS LOS DERECHOS RESERVADOS | DESARROLLADO POR KAAL </p>
             </div>
         </footer>
     );

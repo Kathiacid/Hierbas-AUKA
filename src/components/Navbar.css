@@ -1,16 +1,15 @@
-/* 1. Contenedor Principal */
+
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* ¡Magia! Separa los 3 bloques */
+  justify-content: space-between; 
   align-items: center;
-  padding: 15px 40px; /* Espaciado interno */
-  background-color: #ffffff; /* Fondo blanco */
-  border-bottom: 1px solid #f0f0f0; /* Línea sutil abajo */
+  padding: 15px 40px; 
+  background-color: #ffffff; 
+  border-bottom: 1px solid #f0f0f0; 
   width: 100%;
-  box-sizing: border-box; /* Importante para que el padding no cause scroll */
+  box-sizing: border-box;
 }
 
-/* 2. Logo (Izquierda) */
 .navbar-logo a {
   display: flex;
   align-items: center;
@@ -86,7 +85,7 @@
   color: #888;
 }
 
-/* 6. Botón de Carrito (Como en la foto) */
+
 .navbar-cart-btn {
   position: relative;
   background-color: #f7f6f2; /* Mismo beige */
@@ -122,3 +121,4 @@
   justify-content: center;
   line-height: 1; /* Ajuste para centrar el número */
 }
+

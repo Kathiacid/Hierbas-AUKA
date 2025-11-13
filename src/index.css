@@ -1,8 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -12,9 +17,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #ffffff; /* Fondo blanco por defecto */
-  color: #213547; /* Texto oscuro por defecto */
 }
+
 
 a {
   font-weight: 500;
@@ -63,3 +67,5 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+

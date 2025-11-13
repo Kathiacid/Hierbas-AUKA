@@ -4,9 +4,7 @@ import './Navbar.css'; //
 
 export default function Navbar() {
   return (
-    <header className="navbar-container">
-      
-      {/* 1. Logo (Izquierda) */}
+    <div className="navbar-container">
       <div className="navbar-logo">
         <Link to="/">
           🍃 <h2>AUKA</h2>
@@ -50,6 +48,6 @@ export default function Navbar() {
 
 
       </div>
-    </header>
+    </div>
   );
 }

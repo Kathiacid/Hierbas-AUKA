@@ -1,10 +1,4 @@
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #fafaf7;
-  color: #333;
-  margin: 0;
-  padding: 40px 0;
-}
+
 
 .servicios-container {
   display: flex;

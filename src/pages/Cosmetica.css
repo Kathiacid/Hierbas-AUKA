@@ -1,4 +1,4 @@
-/* Contenedor principal de la página */
+
 .catalogo-medicinal {
   max-width: 1200px;
   margin: 30px auto;
@@ -6,7 +6,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* 1. BARRA DE FILTROS */
+
 .filter-bar {
   margin-bottom: 30px;
   display: flex;
