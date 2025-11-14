@@ -2,8 +2,8 @@
 
 footer {
     width: 100%;
-    /* Fondo principal blanco/claro */
     font-family: Arial, sans-serif;
+    background-color: #d6c996;
 }
 
 .footer-main-content {
@@ -21,9 +21,7 @@ footer {
     padding: 0 20px;
 }
 
-/* ----------------------------------- */
-/* Columna 1: Logo */
-/* ----------------------------------- */
+
 .logo-column {
     flex-basis: 25%;
     max-width: 25%;

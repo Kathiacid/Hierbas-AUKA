@@ -85,14 +85,13 @@ export default function Medicinal() {
           </ul>
         </nav>
 
-        {/* --- 2. GRID DE PRODUCTOS --- */}
+        
         <div className="product-grid-medicinal">
           
           {productosMedicinales.map((producto) => (
             <div className="product-card" key={producto.id}>
               
               <div className="card-image-container">
-                {/* Badge (Etiqueta de Nuevo/Oferta) */}
                 {producto.badge && (
                   <span className={`badge ${producto.badge.tipo}`}>
                     {producto.badge.texto}

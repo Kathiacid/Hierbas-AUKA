@@ -177,6 +177,9 @@
 border: 1px solid pink;
 }
 
+.instagram-profile-block a {
+    font-family: "Lora", serif;
+}
 
 .blog {
     width: 50%;
