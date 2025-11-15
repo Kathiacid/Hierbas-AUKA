@@ -1,80 +1,109 @@
 // src/components/ReelsCarrusel.jsx
 
-import React, { useState } from 'react';
-import './ReelsCarrusel.css'; // Asegúrate de crear este archivo CSS
+// src/components/ReelsCarrusel.jsx
 
-// Datos de prueba (Reemplazar con datos reales de tu API de Instagram)
-const reelsData = [
-    { id: 1,  rating: 5, mediaUrl: "/ruta/a/video1.mp4", postUrl: "URL_INSTAGRAM_1" },
-    { id: 2, rating: 4, mediaUrl: "/ruta/a/video2.mp4", postUrl: "URL_INSTAGRAM_2" },
-    { id: 3, rating: 5, mediaUrl: "/ruta/a/video3.mp4", postUrl: "URL_INSTAGRAM_3" },
-    { id: 4, rating: 5, mediaUrl: "/ruta/a/video4.mp4", postUrl: "URL_INSTAGRAM_4" },
-    { id: 5, rating: 4, mediaUrl: "/ruta/a/video5.mp4", postUrl: "URL_INSTAGRAM_5" },
-];
+import React, { useState, useEffect } from 'react';
+import './ReelsCarrusel.css'; // Usaremos un CSS actualizado
 
 const ReelsCarrusel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [reelsData, setReelsData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchReels = async () => {
+            
+            // --- ¡PELIGRO DE PRODUCCIÓN! ---
+            const accessToken = 'EAALy6evyj0YBPy1ZBQVE4nMg5OuqZAj4joZAuitkqpnSmgW5bDGwytiaWZAP7cRDHTMkv3Fk0f3ZBRFhOzZCaZBbbrHrnSIl9D6ZBWR8vZAvtAzN5aoqB1AxAyh4D1EIGDzfC2vo5w3a3JiBRRzsWyfOyhWP6g4ZAgg02FKaZAragbCZBAWeHiKrBEodkwlaoL7T77MUpRAZBvJne'; 
+            const instagramId = '17841478304664572'; 
+            // --------------------
+
+            // --- PASO 1: Pedimos media_url en lugar de thumbnail_url ---
+            const url = `https://graph.facebook.com/v20.0/${instagramId}/media?fields=id,media_type,media_url,permalink&access_token=${accessToken}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data && data.data) {
+                    const videos = data.data.filter(item => (item.media_type === 'VIDEO' || item.media_type === 'REEL') && item.media_url);
+                    setReelsData(videos);
+                } else if (data.error) {
+                    console.error("Error de la API de Facebook:", data.error.message);
+                }
+            } catch (error) {
+                console.error("Error al cargar los reels (ej. CORS):", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchReels();
+    }, []);
 
     const nextSlide = () => {
-        // Mueve al siguiente, o vuelve al inicio si llega al final
+        if (reelsData.length === 0) return;
         setCurrentIndex((prevIndex) => 
             prevIndex === reelsData.length - 1 ? 0 : prevIndex + 1
         );
     };
 
     const prevSlide = () => {
-        // Mueve al anterior, o vuelve al final si llega al inicio
+        if (reelsData.length === 0) return;
         setCurrentIndex((prevIndex) => 
             prevIndex === 0 ? reelsData.length - 1 : prevIndex - 1
         );
     };
 
-    // Función para renderizar las estrellas
-    const renderStars = (rating) => {
-        return Array(5).fill(0).map((_, i) => (
-            <i 
-                key={i} 
-                className={`fa-star ${i < rating ? 'fas' : 'far'}`} 
-            />
-        ));
-    };
+    if (isLoading) {
+        return <div className="loading-message">Cargando reels...</div>;
+    }
+
+    if (reelsData.length === 0) {
+        return <div className="error-message">No se pudieron cargar los reels. Revisa la consola (F12).</div>;
+    }
 
     const currentReel = reelsData[currentIndex];
 
+    // --- PASO 2: Reemplazamos el <a>...</a> por un <video>... ---
     return (
         <div className="reels-carousel-container">
-            {/* Botón Anterior */}
             <button className="nav-arrow left" onClick={prevSlide}>
                 <i className="fas fa-chevron-left"></i>
             </button>
 
-            {/* Contenedor del Reel Visible */}
-            <a 
-                href={currentReel.postUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="reel-card-link"
-            >
-                <div 
-                    className="reel-card" 
-                    style={{ backgroundImage: `url(${currentReel.mediaUrl})` }}
-                >
-                    {/* Overlay y Play Icon */}
-                    <div className="reel-overlay">
-                        <i className="fas fa-play-circle play-icon"></i>
-                    </div>
-
-                    {/* Información y Estrellas */}
-                    <div className="reel-info">
-                        <p className="reel-author">{currentReel.author}</p>
-                        <div className="reel-rating">
-                            {renderStars(currentReel.rating)}
-                        </div>
-                    </div>
-                </div>
-            </a>
+            {/* Contenedor del Video.
+              Usamos <video> en lugar de <img> o <a>.
+              - key={currentReel.id}: Importante para que React cambie el video.
+              - src={currentReel.media_url}: El enlace .mp4 que pedimos.
+              - autoPlay: Inicia automáticamente.
+              - muted: EN SILENCIO (Obligatorio para que autoPlay funcione en navegadores).
+              - loop: Para que se repita.
+              - playsInline: Para que se reproduzca en iPhone sin ir a pantalla completa.
+            */}
+            <video 
+                key={currentReel.id}
+                src={currentReel.media_url} 
+                autoPlay
+                muted 
+                loop
+                playsInline
+                className="reel-video-player"
+            />
             
-            {/* Botón Siguiente */}
+            {/* Enlace opcional (si aún quieres que puedan hacer clic para ir a Instagram)
+              Lo ponemos *sobre* el video.
+            */}
+            <a 
+                href={currentReel.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="reel-overlay-link"
+                aria-label="Ver este Reel en Instagram"
+            >
+                <i className="fab fa-instagram instagram-icon"></i>
+            </a>
+
             <button className="nav-arrow right" onClick={nextSlide}>
                 <i className="fas fa-chevron-right"></i>
             </button>

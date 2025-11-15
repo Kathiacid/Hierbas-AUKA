@@ -1,113 +1,91 @@
 /* src/components/ReelsCarrusel.css */
 
 .reels-carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 350px; /* Ancho total del componente */
-    height: 550px; /* Altura total del componente */
-    margin: 40px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 320px; /* Ancho de un teléfono */
+  height: 570px; /* Alto aproximado de un reel */
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  background-color: #000; /* Fondo negro por si el video tarda en cargar */
 }
 
-.reel-card-link {
-    text-decoration: none;
-    color: inherit;
+/* El reproductor de video en sí */
+.reel-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que el video cubra todo el espacio sin deformarse */
 }
 
-.reel-card {
-    /* Formato vertical como un Reel/Historia */
-    width: 300px; 
-    height: 500px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.reel-card:hover {
-    transform: scale(1.02);
-}
-
-/* ------------------------------------- */
 /* Flechas de Navegación */
-/* ------------------------------------- */
-
 .nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 10;
-    color: #333;
-    transition: background-color 0.3s;
-}
-
-.nav-arrow:hover {
-    background-color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
 .nav-arrow.left {
-    left: 0;
+  left: 10px;
 }
 
 .nav-arrow.right {
-    right: 0;
+  right: 10px;
 }
 
-/* ------------------------------------- */
-/* Información Interna del Reel */
-/* ------------------------------------- */
-
-.reel-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Capa oscura sobre la imagen */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.nav-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.play-icon {
-    font-size: 3rem;
-    color: white;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+/* Capa transparente sobre el video con el ícono de Instagram */
+.reel-overlay-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end; /* Posiciona el ícono */
+  align-items: flex-end;
+  padding: 15px;
+  text-decoration: none;
 }
 
-.reel-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    color: white;
+.instagram-icon {
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
 }
 
-.reel-author {
-    margin: 0;
-    font-weight: bold;
-    font-size: 1rem;
+.reel-overlay-link:hover .instagram-icon {
+  color: rgba(255, 255, 255, 1);
 }
 
-.reel-rating .fa-star {
-    color: gold; /* Estrellas llenas */
-    margin-right: 2px;
-}
 
-.reel-rating .far {
-    color: rgba(255, 255, 255, 0.4); /* Estrellas vacías (contorno) */
+/* Mensajes de carga/error */
+.loading-message,
+.error-message {
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #555;
+  background-color: #f0f0f0;
+  width: 100%;
 }
