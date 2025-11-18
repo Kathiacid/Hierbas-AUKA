@@ -5,87 +5,140 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 320px; /* Ancho de un teléfono */
-  height: 570px; /* Alto aproximado de un reel */
+  width: 320px; /* Ancho estándar de móvil */
+  height: 570px; /* Relación de aspecto 9:16 */
   overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 20px; /* Bordes más redondeados estilo AUKA */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Sombra más suave y moderna */
   margin: 20px auto;
-  background-color: #000; /* Fondo negro por si el video tarda en cargar */
+  background-color: #000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* El reproductor de video en sí */
+/* Efecto sutil al pasar el mouse por encima de todo el componente */
+.reels-carousel-container:hover {
+  box-shadow: 0 15px 35px rgba(76, 165, 76, 0.2); /* Sombra verde suave */
+}
+
+/* El reproductor de video */
 .reel-video-player {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Asegura que el video cubra todo el espacio sin deformarse */
+  object-fit: cover;
+  display: block;
 }
 
-/* Flechas de Navegación */
+/* --- Flechas de Navegación Estilizadas --- */
 .nav-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente claro */
+  backdrop-filter: blur(5px); /* Efecto borroso estilo iOS/Instagram */
   color: white;
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 45px; /* Un poco más grandes para facilitar el click */
+  height: 45px;
+  font-size: 18px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  outline: none;
 }
 
 .nav-arrow.left {
-  left: 10px;
+  left: 15px;
 }
 
 .nav-arrow.right {
-  right: 10px;
+  right: 15px;
 }
 
 .nav-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: #4CA54C; /* Color VERDE AUKA al hacer hover */
+  border-color: #4CA54C;
+  transform: translateY(-50%) scale(1.1); /* Pequeño efecto de crecimiento */
 }
 
-/* Capa transparente sobre el video con el ícono de Instagram */
+/* --- Capa superior y elementos visuales --- */
+
+/* Capa transparente interactiva */
 .reel-overlay-link {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 5;
-  display: flex;
-  justify-content: flex-end; /* Posiciona el ícono */
-  align-items: flex-end;
-  padding: 15px;
+  z-index: 10;
   text-decoration: none;
+  
+  /* Gradiente negro en la parte inferior para que los iconos resalten */
+  background: linear-gradient(
+    to bottom, 
+    rgba(0,0,0,0) 60%, 
+    rgba(0,0,0,0.6) 100%
+  );
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Empuja contenido al fondo */
+  padding: 20px;
+}
+
+/* Contenedor para info inferior (Icono Instagram + Texto opcional) */
+.reel-bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .instagram-icon {
-  font-size: 30px;
-  color: rgba(255, 255, 255, 0.7);
-  transition: color 0.3s ease;
+  font-size: 32px;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Sombra para que se vea en fondos blancos */
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .reel-overlay-link:hover .instagram-icon {
-  color: rgba(255, 255, 255, 1);
+  color: #4CA54C; /* Icono se pone verde al pasar el mouse */
+  transform: scale(1.2) rotate(5deg);
 }
 
+/* --- AGREGADO: Icono de Play Central (Opcional) --- */
+/* Úsalo si quieres mostrar un botón de play gigante en el centro */
+.play-icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none; /* Para que el click pase a través de él */
+  z-index: 15;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.reels-carousel-container:hover .play-icon-overlay {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
 
 /* Mensajes de carga/error */
 .loading-message,
 .error-message {
-  padding: 20px;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #555;
-  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   width: 100%;
+  font-family: 'Arial', sans-serif;
+  color: #666;
+  background-color: #f0f0f0;
+  font-size: 0.9rem;
 }

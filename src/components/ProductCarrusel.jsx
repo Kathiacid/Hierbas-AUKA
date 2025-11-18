@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductCarrusel.css';
 
-// 🛑 DATOS DE PRUEBA (DUMMY DATA) - Incluyen todos los campos del diseño
 const DUMMY_PRODUCTS = [
     { 
         id: 1, 
@@ -63,28 +62,21 @@ const ProductCarousel = () => {
         setProducts(DUMMY_PRODUCTS); 
     }, []);
 
-    // Función para renderizar las estrellas
-    const renderStars = (rating) => {
-        return Array(5).fill(0).map((_, i) => (
-            <i key={i} className={`fa-star ${i < rating ? 'fas' : 'far'}`} />
-        ));
-    };
-
     return (
         <div className="product-carousel-container">
             {/* Títulos y Header (carousel-header) */}
             <div className="carousel-header">
-                <h2>Productos Destacados <span className="top-icon"><i className="fas fa-certificate"></i></span></h2>
-                <p className="subtitle">Nuestras mejores selecciones y ofertas exclusivas de la semana.</p>
-                <Link to="/catalogo" className="view-more-link">Ver Catálogo Completo</Link>
+                <h2>Productos Destacados </h2>
+                <h3 className="subtitle">Nuestras mejores selecciones y ofertas exclusivas de la semana.</h3>
+                
             </div>
             
             <div className="product-carousel">
                 <div className="product-carousel-inner">
                     {products.map(product => (
                         <div key={product.id} className="product-card">
-                            
-                            {/* Etiqueta de Oferta */}
+
+                            {/* Etiqueta de Oferta (si aplica) */}
                             {product.offer && <div className="offer-tag">OFERTA</div>}
 
                             <div className="product-image-container">
@@ -94,29 +86,22 @@ const ProductCarousel = () => {
                                     className="product-image"
                                 />
                             </div>
-                            
+
                             <div className="product-info">
-                                
+
                                 {/* Contenido Superior: Nombre y Descripción */}
                                 <div>
                                     <h3 className="product-name">
                                         <Link to={`/producto/${product.producto}`}>{product.producto_nombre}</Link>
                                     </h3>
                                     
+                                    {/* Descripción activada */}
                                     <p className="product-description">
                                         {product.producto_descripcion || "Descripción no disponible"}
                                     </p>
                                 </div>
-                                
-                                {/* Contenido Inferior: Rating, Precio y Botón */}
+
                                 <div>
-                                    
-                                    {/* Calificación de Estrellas */}
-                                    <div className="rating">
-                                        {renderStars(product.rating)}
-                                        <span className="rating-count">({product.rating}.0)</span>
-                                    </div>
-                                    
                                     {/* Precio y Descuento */}
                                     <div className="prices">
                                         <p className="product-price">
@@ -128,20 +113,17 @@ const ProductCarousel = () => {
                                             </p>
                                         )}
                                     </div>
-
                                 </div>
-                                
-                                {/* Botón "Añadir al carrito" */}
+
+                                {/* Botón "Añadir al carrito" con el ícono de Font Awesome */}
                                 <Link to={`/producto/${product.producto}`} className="add-to-cart-btn">
-                                    Añadir al carrito
+                                    <i className="fa-solid fa-cart-shopping"></i> Añadir al Carrito
                                 </Link>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-
-
         </div>
     );
 };
