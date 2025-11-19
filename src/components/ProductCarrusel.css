@@ -175,8 +175,7 @@ h2
     align-items: center;
     justify-content: center;
     gap: 8px; /* Espacio entre icono y texto */
-
-    background-color: #4CA54C; /* VERDE AUKA */
+    background-color: #618814; /* VERDE AUKA */
     color: white; 
     border: none; 
     padding: 12px 20px; 
@@ -196,9 +195,6 @@ h2
     box-shadow: 0 6px 12px rgba(76, 165, 76, 0.3);
 }
 
-/* ------------------------------------------------------------- */
-/* Responsividad (Grilla) */
-/* ------------------------------------------------------------- */
 
 @media (max-width: 1200px) {
     .product-card { flex-basis: calc(25% - 19px); }
