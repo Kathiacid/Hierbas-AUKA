@@ -1,62 +1,62 @@
 import React, { useState } from 'react';
-import './Medicinal.css'; // Un CSS nuevo para esta página
+import './Medicinal.css'; 
 
-// --- Datos de Ejemplo (basados en tu imagen) ---
+
 const productosMedicinales = [
   {
     id: 1,
     nombre: 'Manzanilla Orgánica',
     precio: '12.50',
-    imagen: 'https://i.imgur.com/gPjYQZp.jpeg',
+    imagen: 'https://mmpp.cl/wp-content/uploads/2024/11/Photoroom_20250612_184856.jpeg',
     badge: { texto: 'Nuevo', tipo: 'nuevo' }
   },
   {
     id: 2,
     nombre: 'Raíz de Valeriana',
     precio: '15.00',
-    imagen: 'https://i.imgur.com/L1n7Y9q.png',
+    imagen: 'https://natutea.cl/wp-content/uploads/2023/04/VALERIANA-TERMINADO.jpg',
     badge: null
   },
   {
     id: 3,
     nombre: 'Menta Piperita',
     precio: '10.00',
-    imagen: 'https://i.imgur.com/W2Cq4A3.jpeg',
+    imagen: 'https://http2.mlstatic.com/D_NQ_NP_828033-MLC83574114949_042025-O.webp',
     badge: { texto: 'En Oferta', tipo: 'oferta' }
   },
   {
     id: 4,
     nombre: 'Lavanda',
     precio: '14.00',
-    imagen: 'https://i.imgur.com/T0bS1mB.jpeg',
+    imagen: 'https://www.australisherbolaria.com/cdn/shop/files/flores-de-lavanda-seca.jpg?v=1691516389',
     badge: null
   },
   {
     id: 5,
     nombre: 'Ginseng',
     precio: '22.00',
-    imagen: 'https://i.imgur.com/rX8oY9f.jpeg',
+    imagen: 'https://fosetter.com/cdn/shop/files/1221692258882_.pic.jpg?v=1692410930&width=2048',
     badge: null
   },
   {
     id: 6,
     nombre: 'Jengibre',
     precio: '9.50',
-    imagen: 'https://i.imgur.com/7YfG9Y9.jpeg',
+    imagen: 'https://ecovalle.pe/wp-content/uploads/2022/08/JENGIBRE-70-GR.jpg',
     badge: null
   },
   {
     id: 7,
     nombre: 'Cúrcuma',
     precio: '11.50',
-    imagen: 'https://i.imgur.com/qO4Y4Yn.jpeg',
+    imagen: 'https://shamix.cl/cdn/shop/products/012_700x700.png?v=1640811472',
     badge: null
   },
   {
     id: 8,
     nombre: 'Equinácea',
     precio: '18.00',
-    imagen: 'https://i.imgur.com/pYqO4G8.jpeg',
+    imagen: 'https://http2.mlstatic.com/D_NQ_NP_992397-MLA96185543655_102025-O.webp',
     badge: null
   },
 ];
@@ -106,14 +106,13 @@ export default function Medicinal() {
                 <p className="price">${producto.precio}</p>
                 <button className="add-to-cart-btn">
                   <i className="fas fa-shopping-cart"></i>
-                  Añadir al Carrito
+                  Lo quiero
                 </button>
               </div>
             </div>
           ))}
         </div>
 
-        {/* --- 3. PAGINACIÓN --- */}
         <nav className="pagination-nav">
           <ul>
             <li><button aria-label="Página anterior"><i className="fas fa-chevron-left"></i></button></li>

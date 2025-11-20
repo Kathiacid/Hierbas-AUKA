@@ -64,7 +64,6 @@ const ProductCarousel = () => {
 
     return (
         <div className="product-carousel-container">
-            {/* Títulos y Header (carousel-header) */}
             <div className="carousel-header">
                 <h2>Productos Destacados </h2>
                 <h3 className="subtitle">Nuestras mejores selecciones y ofertas exclusivas de la semana.</h3>
@@ -75,8 +74,6 @@ const ProductCarousel = () => {
                 <div className="product-carousel-inner">
                     {products.map(product => (
                         <div key={product.id} className="product-card">
-
-                            {/* Etiqueta de Oferta (si aplica) */}
                             {product.offer && <div className="offer-tag">OFERTA</div>}
 
                             <div className="product-image-container">
@@ -88,21 +85,16 @@ const ProductCarousel = () => {
                             </div>
 
                             <div className="product-info">
-
-                                {/* Contenido Superior: Nombre y Descripción */}
                                 <div>
                                     <h3 className="product-name">
                                         <Link to={`/producto/${product.producto}`}>{product.producto_nombre}</Link>
                                     </h3>
-                                    
-                                    {/* Descripción activada */}
                                     <p className="product-description">
                                         {product.producto_descripcion || "Descripción no disponible"}
                                     </p>
                                 </div>
 
                                 <div>
-                                    {/* Precio y Descuento */}
                                     <div className="prices">
                                         <p className="product-price">
                                             ${parseFloat(product.producto_precio).toLocaleString('es-CL')}
@@ -114,8 +106,6 @@ const ProductCarousel = () => {
                                         )}
                                     </div>
                                 </div>
-
-                                {/* Botón "Añadir al carrito" con el ícono de Font Awesome */}
                                 <Link to={`/producto/${product.producto}`} className="add-to-cart-btn">
                                     <i className="fa-solid fa-cart-shopping"></i> Añadir al Carrito
                                 </Link>

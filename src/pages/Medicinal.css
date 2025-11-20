@@ -1,18 +1,33 @@
-/* Contenedor principal de la página */
 .catalogo-medicinal {
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
-/* 1. BARRA DE FILTROS */
+.banner-container {
+  margin-bottom: 30px;
+}
+
+.banner-medicinal {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 14px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
 .filter-bar {
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .filter-bar ul {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -28,11 +43,12 @@
   font-weight: 500;
   color: #555;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .filter-bar button:hover {
-  background-color: #e1e6d4; 
+  background-color: #e1e6d4;
+  transform: scale(1.03);
 }
 
 .filter-bar button.active {
@@ -41,108 +57,131 @@
   border-color: #5a8a66;
 }
 
-/* 2. GRID DE PRODUCTOS */
+
 .product-grid-medicinal {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 25px;
   margin-bottom: 40px;
 }
 
-/* 3. TARJETA DE PRODUCTO */
+
 .product-card {
-  background-color: #fdfdfb; 
-  border-radius: 12px;
-  border: 1px solid #f0f0f0;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  transition: box-shadow 0.3s ease;
+  background: #f4f4e8; 
+  border: 1px solid #e2e2d0; 
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .product-card:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  border-color: #d4d4c0;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
 }
 
 .card-image-container {
-  position: relative;
+  width: 100%;
   aspect-ratio: 1 / 1; 
-  border-radius: 12px 12px 0 0; 
-  overflow: hidden; 
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  position: relative;
 }
 
 .card-image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-/* 4. BADGES (Etiquetas) */
+.product-card:hover .card-image-container img {
+  transform: scale(1.05); 
+}
+
 .badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 5px 10px;
+  top: 15px;
+  right: 15px;
+  left: auto;
+  padding: 4px 10px;
   border-radius: 5px;
   font-size: 0.75rem;
   font-weight: bold;
-  color: #fff;
+  color: white;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  background-color: #e74c3c; 
 }
 
-.badge.nuevo {
-  background-color: #f39c12; 
-}
+.badge.nuevo { background-color: #d9822b; } 
+.badge.oferta { background-color: #e74c3c; } 
 
-.badge.oferta {
-  background-color: #2ecc71; 
-}
 
-/* 5. CUERPO DE LA TARJETA */
 .card-body {
-  padding: 15px;
-  background-color: #F4F1DE;
-  border-top: 4px solid #e0e0e0; 
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .card-body h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0 0 5px 0;
+  margin: 5px 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
   color: #333;
 }
 
-.card-body .price {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 15px;
+.price {
+  color: #4CA54C; 
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin: 0 0 15px 0;
 }
 
 .add-to-cart-btn {
-  background-color: #8F9D70; 
-  border: none;
-  border-radius: 8px;
-  width: 100%;
-  padding: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: background-color 0.3s ease;
-  color: #f0f0f0;
+  
+  background-color: #4CA54C; 
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(76, 165, 76, 0.2);
 }
 
 .add-to-cart-btn:hover {
-  background-color: #d1d8c2; 
+  background-color: #3e8e3e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(76, 165, 76, 0.3);
 }
 
-/* 6. PAGINACIÓN */
+
 .pagination-nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .pagination-nav ul {
@@ -153,7 +192,7 @@
   gap: 8px;
 }
 
-.pagination-nav button,
+.pagination-nav button, 
 .pagination-nav span {
   display: flex;
   align-items: center;
@@ -161,34 +200,31 @@
   width: 40px;
   height: 40px;
   border: 1px solid #e0e0e0;
-  border-radius: 50%; 
+  border-radius: 50%;
   background-color: #fff;
   font-size: 0.9rem;
   color: #555;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.pagination-nav button:hover {
+  background-color: #f7f6f2;
+  transform: scale(1.05);
+}
+
+.pagination-nav button.active {
+  background-color: #5a8a66;
+  color: #fff;
+  border-color: #5a8a66;
 }
 
 .pagination-nav span {
   border: none;
   cursor: default;
-}
-
-.pagination-nav button:hover {
-  background-color: #f7f6f2;
-}
-
-.pagination-nav button.active {
-  background-color: #5a8a66; 
-  color: #fff;
-  border-color: #5a8a66;
+  background: none;
 }
 
 .pagination-nav button i {
-  font-size: 0.75rem; 
-}
-
-.banner-content {
-  display: flex;
-  justify-content: center;
+  font-size: 0.75rem;
 }

@@ -1,9 +1,6 @@
-// src/components/ReelsCarrusel.jsx
-
-// src/components/ReelsCarrusel.jsx
 
 import React, { useState, useEffect } from 'react';
-import './ReelsCarrusel.css'; // Usaremos un CSS actualizado
+import './ReelsCarrusel.css'; 
 
 const ReelsCarrusel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,12 +10,9 @@ const ReelsCarrusel = () => {
     useEffect(() => {
         const fetchReels = async () => {
             
-            // --- ¡PELIGRO DE PRODUCCIÓN! ---
             const accessToken = 'EAALy6evyj0YBPy1ZBQVE4nMg5OuqZAj4joZAuitkqpnSmgW5bDGwytiaWZAP7cRDHTMkv3Fk0f3ZBRFhOzZCaZBbbrHrnSIl9D6ZBWR8vZAvtAzN5aoqB1AxAyh4D1EIGDzfC2vo5w3a3JiBRRzsWyfOyhWP6g4ZAgg02FKaZAragbCZBAWeHiKrBEodkwlaoL7T77MUpRAZBvJne'; 
             const instagramId = '17841478304664572'; 
-            // --------------------
 
-            // --- PASO 1: Pedimos media_url en lugar de thumbnail_url ---
             const url = `https://graph.facebook.com/v20.0/${instagramId}/media?fields=id,media_type,media_url,permalink&access_token=${accessToken}`;
 
             try {
@@ -65,22 +59,12 @@ const ReelsCarrusel = () => {
 
     const currentReel = reelsData[currentIndex];
 
-    // --- PASO 2: Reemplazamos el <a>...</a> por un <video>... ---
+
     return (
         <div className="reels-carousel-container">
             <button className="nav-arrow left" onClick={prevSlide}>
                 <i className="fas fa-chevron-left"></i>
             </button>
-
-            {/* Contenedor del Video.
-              Usamos <video> en lugar de <img> o <a>.
-              - key={currentReel.id}: Importante para que React cambie el video.
-              - src={currentReel.media_url}: El enlace .mp4 que pedimos.
-              - autoPlay: Inicia automáticamente.
-              - muted: EN SILENCIO (Obligatorio para que autoPlay funcione en navegadores).
-              - loop: Para que se repita.
-              - playsInline: Para que se reproduzca en iPhone sin ir a pantalla completa.
-            */}
             <video 
                 key={currentReel.id}
                 src={currentReel.media_url} 
@@ -90,10 +74,6 @@ const ReelsCarrusel = () => {
                 playsInline
                 className="reel-video-player"
             />
-            
-            {/* Enlace opcional (si aún quieres que puedan hacer clic para ir a Instagram)
-              Lo ponemos *sobre* el video.
-            */}
             <a 
                 href={currentReel.permalink}
                 target="_blank"

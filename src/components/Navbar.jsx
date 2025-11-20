@@ -11,8 +11,6 @@ export default function Navbar() {
           🍃 <h2>AUKA</h2>
         </Link>
       </div>
-
-      {/* 2. Links de Navegación (Centro) */}
       <nav className="navbar-links">
         <ul>
           <li>
@@ -36,14 +34,10 @@ export default function Navbar() {
           </li>
         </ul>
       </nav>
-
-      {/* 3. Búsqueda y Carrito (Derecha) */}
       <div className="navbar-right">
         
-        {/* Barra de Búsqueda */}
         <div className="navbar-search">
           <input type="text" placeholder="Buscar productos..." />
-          {/* Asegúrate de tener Font Awesome */}
           <i className="fas fa-search"></i>
         </div>
 

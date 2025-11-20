@@ -5,7 +5,7 @@ import Blog from './pages/Blog.jsx';
 import Medicinal from './pages/Medicinal.jsx';
 import SobreNosotros from './pages/SobreNosotros.jsx';
 import Cosmetica from './pages/Cosmetica.jsx'; 
-import ProductoDetalle from './pages/ProductoDetalle.jsx'; 
+import ProductoDetalle from './pages/DetalleProducto.jsx'; 
 import Servicios from './pages/Servicios.jsx';
 import Navbar from './components/Navbar.jsx'; 
 import Footer from './components/Footer.jsx'; 

@@ -24,13 +24,13 @@
   font-weight: 600;
 }
 
-/* 3. Links de Navegación (Centro) */
+
 .navbar-links ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 30px; /* Espacio entre cada link */
+  gap: 30px;
 }
 
 .navbar-links a {
@@ -42,31 +42,30 @@
   transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
-/* El estilo de la página activa (como 'Productos' en verde en tu foto) */
+
 .navbar-links a:hover,
 .navbar-links a.active {
-  color: #5a8a66; /* El verde de tu logo */
+  color: #5a8a66;
   border-bottom: 2px solid #5a8a66;
 }
 
-/* 4. Lado Derecho (Búsqueda y Carrito) */
+
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 20px; /* Espacio entre la búsqueda y el carrito */
+  gap: 20px;
 }
 
-/* 5. Barra de Búsqueda (Como en la foto) */
+
 .navbar-search {
   position: relative;
 }
 
 .navbar-search input {
   border: 1px solid #e0e0e0;
-  /* El color beige claro de tu foto */
   background-color: #f7f6f2; 
-  border-radius: 50px; /* Muy redondeado */
-  padding: 10px 40px 10px 20px; /* Espacio para el ícono */
+  border-radius: 50px; 
+  padding: 10px 40px 10px 20px;
   font-size: 0.9rem;
   outline: none;
   transition: border-color 0.3s ease;
@@ -76,7 +75,7 @@
   border-color: #5a8a66;
 }
 
-/* Posicionamiento del ícono de lupa */
+
 .navbar-search i {
   position: absolute;
   right: 18px;
@@ -88,9 +87,9 @@
 
 .navbar-cart-btn {
   position: relative;
-  background-color: #f7f6f2; /* Mismo beige */
+  background-color: #f7f6f2; 
   border: none;
-  border-radius: 50%; /* Círculo perfecto */
+  border-radius: 50%; 
   width: 44px;
   height: 44px;
   cursor: pointer;
@@ -104,12 +103,12 @@
   color: #333;
 }
 
-/* 7. Badge de Notificación (Naranja) */
+
 .cart-badge {
   position: absolute;
   top: 2px;
   right: 2px;
-  background-color: #f39c12; /* Naranja */
+  background-color: #f39c12;
   color: white;
   width: 18px;
   height: 18px;
@@ -119,6 +118,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1; /* Ajuste para centrar el número */
+  line-height: 1; 
 }
 

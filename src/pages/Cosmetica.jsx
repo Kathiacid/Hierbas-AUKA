@@ -8,56 +8,64 @@ const productosCosmetica = [
     nombre: 'Manzanilla Orgánica',
     precio: 12500,
     imagen: 'https://www.conasi.eu/blog/wp-content/uploads/2021/07/aceite-oliva-piel-121.jpg',
-    offer: true
+    offer: true,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 2,
     nombre: 'Raíz de Valeriana',
     precio: 15000,
-    imagen: 'https://i.imgur.com/L1n7Y9q.png',
-    offer: false
+    imagen: 'https://borinquennatural.net/cdn/shop/products/raiz-valeriana-liquido-gotas-1oz-252601_240x.jpg?v=1724201693',
+    offer: false,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 3,
     nombre: 'Menta Piperita',
     precio: 10000,
-    imagen: 'https://i.imgur.com/W2Cq4A3.jpeg',
-    offer: true
+    imagen: 'https://m.media-amazon.com/images/I/718CyR2ruRL._AC_UF1000,1000_QL80_.jpg',
+    offer: true,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 4,
     nombre: 'Lavanda',
     precio: 14000,
-    imagen: 'https://i.imgur.com/T0bS1mB.jpeg',
-    offer: false
+    imagen: 'https://image.tuasaude.com/media/article/le/uq/oleo-essencial-de-lavanda_61273.jpg?width=686&height=487',
+    offer: false,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 5,
     nombre: 'Ginseng',
     precio: 22000,
-    imagen: 'https://i.imgur.com/rX8oY9f.jpeg',
-    offer: false
+    imagen: 'https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/nrt/nrt11932/l/66.jpg',
+    offer: false,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 6,
     nombre: 'Jengibre',
     precio: 9500,
-    imagen: 'https://i.imgur.com/7YfG9Y9.jpeg',
-    offer: false
+    imagen: 'https://images.ecestaticos.com/I8WcoeASNvK9AJRLktH8YLQQQ84=/126x48:1085x588/1440x810/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fceb%2F354%2Fa21%2Fceb354a214bd32fecd3a363ce4f06c69.jpg',
+    offer: false,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 7,
     nombre: 'Cúrcuma',
     precio: 11500,
-    imagen: 'https://i.imgur.com/qO4Y4Yn.jpeg',
-    offer: false
+    imagen: 'https://www.cosmeticosalpormayor.com/cdn/shop/files/preview_images/27693b991f024a549596b9b6e0e4e684.thumbnail.0000000000_600x.jpg?v=1743628943',
+    offer: false,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
   {
     id: 8,
     nombre: 'Equinácea',
     precio: 18000,
-    imagen: 'https://i.imgur.com/pYqO4G8.jpeg',
-    offer: false
+    imagen: 'https://attura.shop/cdn/shop/files/CremaEquinacea.jpg?v=1707210411',
+    offer: false,
+    beneficios: 'Relajante, Energizante, para la digestion'
   },
 ];
 
@@ -66,7 +74,6 @@ export default function Cosmetica() {
 
   return (
     <div>
-      {/* Contenedor principal con clase única */}
       <main className="catalogo-cosmetica">
         
         {/* Banner */}
@@ -76,7 +83,6 @@ export default function Cosmetica() {
             </div>
         </div>
 
-        {/* Filtros */}
         <nav className="cosmetica-filter-bar">
           <ul>
             <li><button onClick={() => setFiltroActivo('Todo')} className={filtroActivo === 'Todo' ? 'active' : ''}>Todo</button></li>
@@ -87,16 +93,13 @@ export default function Cosmetica() {
           </ul>
         </nav>
         
-        {/* Grid de Productos */}
         <div className="cosmetica-grid">
           
           {productosCosmetica.map((producto) => (
             <div className="cosmetica-card" key={producto.id}>
               
-              {/* Etiqueta de Oferta */}
               {producto.offer && <div className="cosmetica-offer-tag">OFERTA</div>}
 
-              {/* Imagen */}
               <div className="cosmetica-image-container">
                 <img 
                   src={producto.imagen} 
@@ -105,12 +108,17 @@ export default function Cosmetica() {
                 />
               </div>
 
-              {/* Info del Producto */}
               <div className="cosmetica-info">
                 <div>
                     <h3 className="cosmetica-name">
                         <a href="#">{producto.nombre}</a>
                     </h3>
+                </div>
+                
+                <div>
+                    <span className="cosmetica-beneficios">
+                        <a href="#">{producto.beneficios}</a>
+                    </span>
                 </div>
 
                 <div>
@@ -122,7 +130,7 @@ export default function Cosmetica() {
                 </div>
 
                 <button className="cosmetica-btn">
-                  <i className="fa-solid fa-cart-shopping"></i> Añadir al Carrito
+                  <i className="fa-solid fa-cart-shopping"></i> Lo quiero
                 </button>
               </div>
 

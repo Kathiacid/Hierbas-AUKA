@@ -1,26 +1,23 @@
-/* src/components/ReelsCarrusel.css */
 
 .reels-carousel-container {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 320px; /* Ancho estándar de móvil */
-  height: 570px; /* Relación de aspecto 9:16 */
+  width: 320px;
+  height: 570px; 
   overflow: hidden;
-  border-radius: 20px; /* Bordes más redondeados estilo AUKA */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Sombra más suave y moderna */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
   margin: 20px auto;
   background-color: #000;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto sutil al pasar el mouse por encima de todo el componente */
 .reels-carousel-container:hover {
-  box-shadow: 0 15px 35px rgba(76, 165, 76, 0.2); /* Sombra verde suave */
+  box-shadow: 0 15px 35px rgba(76, 165, 76, 0.2); 
 }
 
-/* El reproductor de video */
 .reel-video-player {
   width: 100%;
   height: 100%;
@@ -28,17 +25,16 @@
   display: block;
 }
 
-/* --- Flechas de Navegación Estilizadas --- */
 .nav-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente claro */
-  backdrop-filter: blur(5px); /* Efecto borroso estilo iOS/Instagram */
+  background-color: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(5px); 
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  width: 45px; /* Un poco más grandes para facilitar el click */
+  width: 45px; 
   height: 45px;
   font-size: 18px;
   cursor: pointer;
@@ -59,14 +55,12 @@
 }
 
 .nav-arrow:hover {
-  background-color: #4CA54C; /* Color VERDE AUKA al hacer hover */
+  background-color: #4CA54C; 
   border-color: #4CA54C;
-  transform: translateY(-50%) scale(1.1); /* Pequeño efecto de crecimiento */
+  transform: translateY(-50%) scale(1.1); 
 }
 
-/* --- Capa superior y elementos visuales --- */
 
-/* Capa transparente interactiva */
 .reel-overlay-link {
   position: absolute;
   top: 0;
@@ -75,8 +69,6 @@
   height: 100%;
   z-index: 10;
   text-decoration: none;
-  
-  /* Gradiente negro en la parte inferior para que los iconos resalten */
   background: linear-gradient(
     to bottom, 
     rgba(0,0,0,0) 60%, 
@@ -85,11 +77,10 @@
   
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Empuja contenido al fondo */
+  justify-content: flex-end; 
   padding: 20px;
 }
 
-/* Contenedor para info inferior (Icono Instagram + Texto opcional) */
 .reel-bottom-info {
   display: flex;
   justify-content: space-between;
@@ -100,17 +91,15 @@
 .instagram-icon {
   font-size: 32px;
   color: white;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Sombra para que se vea en fondos blancos */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); 
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .reel-overlay-link:hover .instagram-icon {
-  color: #4CA54C; /* Icono se pone verde al pasar el mouse */
+  color: #4CA54C; 
   transform: scale(1.2) rotate(5deg);
 }
 
-/* --- AGREGADO: Icono de Play Central (Opcional) --- */
-/* Úsalo si quieres mostrar un botón de play gigante en el centro */
 .play-icon-overlay {
   position: absolute;
   top: 50%;
@@ -118,7 +107,7 @@
   transform: translate(-50%, -50%);
   font-size: 50px;
   color: rgba(255, 255, 255, 0.8);
-  pointer-events: none; /* Para que el click pase a través de él */
+  pointer-events: none; 
   z-index: 15;
   opacity: 0.8;
   transition: opacity 0.3s;
@@ -129,7 +118,6 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
-/* Mensajes de carga/error */
 .loading-message,
 .error-message {
   display: flex;
