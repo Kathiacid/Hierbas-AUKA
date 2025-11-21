@@ -86,10 +86,11 @@ export default function Cosmetica() {
         <nav className="cosmetica-filter-bar">
           <ul>
             <li><button onClick={() => setFiltroActivo('Todo')} className={filtroActivo === 'Todo' ? 'active' : ''}>Todo</button></li>
-            <li><button onClick={() => setFiltroActivo('Relajantes')} className={filtroActivo === 'Relajantes' ? 'active' : ''}>Relajantes</button></li>
-            <li><button onClick={() => setFiltroActivo('Energizantes')} className={filtroActivo === 'Energizantes' ? 'active' : ''}>Energizantes</button></li>
-            <li><button onClick={() => setFiltroActivo('Digestión')} className={filtroActivo === 'Digestión' ? 'active' : ''}>Para la digestión</button></li>
-            <li><button onClick={() => setFiltroActivo('Estrés')} className={filtroActivo === 'Estrés' ? 'active' : ''}>Para el estrés</button></li>
+            <li><button onClick={() => setFiltroActivo('Relajantes')} className={filtroActivo === 'Spray' ? 'active' : ''}>Spray</button></li>
+            <li><button onClick={() => setFiltroActivo('Energizantes')} className={filtroActivo === 'Roll-on' ? 'active' : ''}>Roll-on</button></li>
+            <li><button onClick={() => setFiltroActivo('Digestión')} className={filtroActivo === 'Serum' ? 'active' : ''}>Serum</button></li>
+            <li><button onClick={() => setFiltroActivo('Estrés')} className={filtroActivo === 'Barra' ? 'active' : ''}>Barra</button></li>
+            <li><button onClick={() => setFiltroActivo('Estrés')} className={filtroActivo === 'Ungüento' ? 'active' : ''}>Ungüento</button></li>
           </ul>
         </nav>
         
