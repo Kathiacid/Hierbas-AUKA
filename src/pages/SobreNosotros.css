@@ -1,0 +1,299 @@
+/* AboutUs.css */
+
+:root {
+  --color-primary-green: #8e9d73; /* Verde oliva para detalles y botones */
+  --color-bg-cream: #f9f6e8;      /* Crema claro (fondo decorativo) */
+  --color-card-bg: #f4f2e6;       /* Crema un poco más oscuro (fondo tarjetas) */
+  --color-text-dark: #333333;
+  --color-text-gray: #666666;
+  --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.about-us-container {
+  font-family: var(--font-family);
+  color: var(--color-text-dark);
+  padding: 60px 20px;
+  max-width: 1100px; /* Ancho máximo para centrar todo el contenido */
+  margin: 0 auto;
+}
+
+/* --- ESTILOS COMUNES PARA TÍTULOS CENTRADOS --- */
+.centered-header-block {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.centered-title {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+/* La línea verde decorativa debajo de los títulos centrados */
+.centered-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: var(--color-primary-green);
+  margin: 20px auto 0;
+}
+
+.centered-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-gray);
+  max-width: 750px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* =========================================
+   SECCIÓN 1: INTRODUCCIÓN (Quiénes somos)
+   ========================================= */
+.intro-section {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.intro-content {
+  flex: 1;
+}
+
+.intro-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+  /* Nota: Este título tiene la línea decorativa integrada en el diseño original a la izquierda */
+  position: relative;
+}
+
+.intro-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: var(--color-primary-green);
+  margin-top: 15px;
+}
+
+.intro-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text-gray);
+  margin-bottom: 25px;
+}
+
+.intro-image-wrapper {
+  flex: 1;
+  background-color: var(--color-bg-cream);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  object-fit: cover;
+}
+
+/* =========================================
+   SECCIÓN 2: CÓMO TRABAJA AUKA (Grid Vertical)
+   ========================================= */
+.how-we-work-section {
+  margin-bottom: 120px;
+}
+
+.process-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+
+.process-card {
+  background-color: var(--color-card-bg);
+  border-radius: 16px;
+  padding: 40px 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.process-icon-circle {
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-primary-green);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.process-icon-circle span {
+  font-size: 2.2rem;
+  color: white; /* Asumiendo que usas emojis o texto blanco */
+}
+
+.process-card-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: var(--color-text-dark);
+  font-weight: 700;
+}
+
+.process-card-text {
+  font-size: 0.95rem;
+  color: var(--color-text-gray);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =========================================
+   SECCIÓN 3: QUÉ HACE AUKA (Grid Horizontal)
+   ========================================= */
+.what-we-do-section {
+  margin-bottom: 120px;
+}
+
+.offerings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.offering-card {
+  background-color: var(--color-card-bg);
+  border-radius: 16px;
+  padding: 30px 25px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.offering-icon-wrapper {
+  flex: 0 0 auto;
+}
+
+.offering-icon-wrapper span {
+  font-size: 2.2rem;
+  color: var(--color-primary-green);
+}
+
+.offering-content {
+  flex: 1;
+}
+
+.offering-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--color-text-dark);
+  font-weight: 700;
+}
+
+.offering-card-text {
+  font-size: 0.9rem;
+  color: var(--color-text-gray);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* =========================================
+   SECCIÓN 4: DÓNDE ENCONTRARNOS (Locations)
+   ========================================= */
+.locations-section {
+  margin-bottom: 80px;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.location-card {
+  background-color: var(--color-card-bg);
+  border-radius: 16px;
+  overflow: hidden; /* Para que la imagen respete el borde redondeado */
+  display: flex;
+  flex-direction: column;
+}
+
+.location-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.location-details {
+  padding: 30px;
+  flex: 1;
+}
+
+.location-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--color-text-dark);
+}
+
+.location-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--color-text-gray);
+  font-size: 0.95rem;
+}
+
+.location-info-row span {
+    font-size: 1.1rem;
+}
+
+.map-link {
+  color: var(--color-primary-green);
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
+}
+
+.map-link:hover {
+    opacity: 0.8;
+}
+
+/* =========================================
+   RESPONSIVIDAD
+   ========================================= */
+@media (max-width: 960px) {
+  .intro-section {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .intro-image-wrapper {
+    width: 100%;
+  }
+
+  .process-cards-grid,
+  .offerings-grid,
+  .locations-grid {
+    grid-template-columns: 1fr; /* Todo a una columna en móvil/tablet */
+    gap: 20px;
+  }
+
+  .intro-title, .centered-title {
+    font-size: 2rem;
+  }
+}

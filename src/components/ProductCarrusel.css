@@ -38,9 +38,9 @@ h2
 
 .product-carousel-inner {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    width: 100%; 
+    flex-wrap: nowrap; 
+    justify-content: flex-start; 
+    width: auto;
     gap: 25px;
 }
 
