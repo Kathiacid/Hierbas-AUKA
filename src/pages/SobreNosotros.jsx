@@ -18,8 +18,6 @@ const AboutUs = () => {
 
   return (
     <div className="about-us-container">
-      
-      {/* ================== SECCIÓN 1: INTRODUCCIÓN ================== */}
       <section className="intro-section">
         <div className="intro-content">
           <h1 className="intro-title">¿Quiénes somos Auka?</h1>
@@ -46,7 +44,6 @@ const AboutUs = () => {
       </section>
 
 
-      {/* ================== SECCIÓN 2: CÓMO TRABAJA AUKA ================== */}
       <section className="how-we-work-section">
         <div className="centered-header-block">
           <h2 className="centered-title">¿Cómo trabaja Auka?</h2>
