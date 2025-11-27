@@ -1,4 +1,8 @@
-
+:root{
+    --links: #C6E079
+    --verde-vivo: #4CAF50
+    --verde-vivo-oscuro:#618814
+}
 .home-hero-section {
     position: relative; 
     height: 100vh; 
@@ -25,6 +29,14 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 128, 0, 0.4); 
+}
+
+.home-hero-section a{
+    color: white;
+}
+
+.home-hero-section button:hover{
+    background-color: #327434;
 }
 
 
@@ -122,6 +134,10 @@
     display: flex;
     gap:50px;
     justify-content:center ;
+}
+
+.tarjetas a{
+    color: ;
 }
 
 .tarjeta-categoria {

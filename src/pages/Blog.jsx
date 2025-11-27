@@ -20,7 +20,7 @@ const mockPosts = [
     <p>La clave para la cúrcuma es consumirla con pimienta negra, que aumenta su absorción hasta en un 2000%. Un té caliente de jengibre fresco, cúrcuma en polvo, una pizca de pimienta y miel es la forma perfecta de empezar el día.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     `,
-    image: "https://placehold.co/600x800/8e9d73/FFFFFF?text=Jengibre+y+Curcuma",
+    image: "https://i0.wp.com/www.canal12misiones.com/wp-content/uploads/2025/05/image-525.png?resize=1089%2C730&ssl=1",
     alt: "Decoración de plantas colgantes"
 },
 {
@@ -33,7 +33,7 @@ const mockPosts = [
     <p>Gracias a la combinación de cafeína y L-teanina, el matcha proporciona un estado de alerta relajado que puede durar hasta 6 horas, sin los picos y caídas asociados con el café.</p>
     <p>Además, está cargado de antioxidantes, especialmente EGCG, conocido por sus propiedades protectoras contra el daño celular.</p>
     `,
-    image: "https://placehold.co/600x800/f9f6e8/8e9d73?text=Te+Matcha",
+    image: "https://info.ehl.edu/hubfs/Blog-EHL-Insights/Images-EHL-Insights/EHL-Passugg_Blog_Matcha_Header.jpg",
     alt: "Taza de té matcha"
 },
 {
@@ -46,7 +46,7 @@ const mockPosts = [
     <p>No necesitas 30 minutos. Empieza con 3 respiraciones conscientes antes de comer, o al despertarte. Siente el aire entrar y salir. Eso es todo. Eso es mindfulness.</p>
     <p>La práctica constante reduce el estrés, mejora la concentración y aumenta la inteligencia emocional. Es el gimnasio de la mente.</p>
     `,
-    image: "https://placehold.co/600x800/dcdcdc/333333?text=Mindfulness",
+    image: "https://neuro.wharton.upenn.edu/wp-content/uploads/2020/04/iStock-Blog2-e1585773724832.jpg",
     alt: "Persona meditando"
 }
 ];

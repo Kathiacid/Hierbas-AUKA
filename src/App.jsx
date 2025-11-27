@@ -9,9 +9,11 @@ import ProductoDetalle from './pages/DetalleProducto.jsx';
 import Servicios from './pages/Servicios.jsx';
 import Navbar from './components/Navbar.jsx'; 
 import Footer from './components/Footer.jsx'; 
+import { CartProvider } from './components/CartContext.jsx';
 
 function App() {
   return (
+    <CartProvider>
     <BrowserRouter>
     <Navbar/>
       <main>
@@ -29,6 +31,7 @@ function App() {
       </main>
       <Footer /> 
     </BrowserRouter>
+    </CartProvider>
   );
 }
 

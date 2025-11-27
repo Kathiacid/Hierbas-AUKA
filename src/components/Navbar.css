@@ -1,3 +1,4 @@
+/* --- Navbar.css COMPLETO --- */
 
 .navbar-container {
   display: flex;
@@ -8,6 +9,7 @@
   border-bottom: 1px solid #f0f0f0; 
   width: 100%;
   box-sizing: border-box;
+  position: relative; /* Importante para el z-index del carrito */
 }
 
 .navbar-logo a {
@@ -23,7 +25,6 @@
   font-size: 1.5rem;
   font-weight: 600;
 }
-
 
 .navbar-links ul {
   display: flex;
@@ -42,20 +43,18 @@
   transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
-
 .navbar-links a:hover,
 .navbar-links a.active {
   color: #5a8a66;
   border-bottom: 2px solid #5a8a66;
 }
 
-
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative; /* NECESARIO: Para que el carrito se posicione respecto a este bloque */
 }
-
 
 .navbar-search {
   position: relative;
@@ -75,7 +74,6 @@
   border-color: #5a8a66;
 }
 
-
 .navbar-search i {
   position: absolute;
   right: 18px;
@@ -84,8 +82,8 @@
   color: #888;
 }
 
-
-.navbar-cart-btn {
+/* BOTÓN DEL CARRITO (EL ICONO REDONDO) */
+.navbar-cart-btn, .navbar-cart-icon { /* Agregué ambas clases por si acaso */
   position: relative;
   background-color: #f7f6f2; 
   border: none;
@@ -96,6 +94,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.navbar-cart-btn:hover {
+  background-color: #e0e0e0;
 }
 
 .navbar-cart-btn i {
@@ -103,21 +106,155 @@
   color: #333;
 }
 
-
 .cart-badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: -2px;
+  right: -2px;
   background-color: #f39c12;
   color: white;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1; 
+  border: 2px solid white; /* Un pequeño borde blanco para separarlo */
 }
 
+/* =========================================
+   NUEVOS ESTILOS: DESPLEGABLE DEL CARRITO
+   ========================================= */
+
+.cart-dropdown {
+  position: absolute;
+  top: 120%; /* Aparece justo debajo del icono */
+  right: 0;
+  width: 320px; /* Ancho de la caja */
+  background-color: white;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15); /* Sombra elegante */
+  border-radius: 12px;
+  padding: 20px;
+  z-index: 1000;
+  border: 1px solid #f0f0f0;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Título dentro del carrito */
+.cart-dropdown h4 {
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Lista de productos (con scroll si hay muchos) */
+.cart-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px; /* Si pasa de esta altura, aparece scroll */
+  overflow-y: auto;
+}
+
+/* Cada fila de producto */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.cart-thumb {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 12px;
+  border: 1px solid #eee;
+}
+
+.cart-item-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-info span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.cart-item-info small {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+}
+
+/* Botón de eliminar (basurero) */
+.btn-remove {
+  background: none;
+  border: none;
+  color: #e74c3c; /* Rojo suave */
+  cursor: pointer;
+  padding: 5px;
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+}
+
+.btn-remove:hover {
+  transform: scale(1.1);
+  color: #c0392b;
+}
+
+/* Botón de WhatsApp */
+.btn-whatsapp-consultar {
+  width: 100%;
+  background-color: #25D366; /* Verde WhatsApp oficial */
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.btn-whatsapp-consultar:hover {
+  background-color: #1ebc57; /* Verde un poco más oscuro al pasar mouse */
+}
+
+/* Mensaje cuando está vacío */
+.cart-dropdown p {
+  text-align: center;
+  color: #999;
+  font-size: 0.9rem;
+  margin: 20px 0;
+}
+
+/* Pequeña animación para que aparezca suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Estilo para la barra de scroll del carrito (opcional, para que se vea moderna) */
+.cart-items-list::-webkit-scrollbar {
+  width: 6px;
+}
+.cart-items-list::-webkit-scrollbar-thumb {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}

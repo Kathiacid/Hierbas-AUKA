@@ -1,73 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { productApi } from '../api'; 
 import './Medicinal.css'; 
-
-
-const productosMedicinales = [
-  {
-    id: 1,
-    nombre: 'Manzanilla Orgánica',
-    precio: '12.50',
-    imagen: 'https://mmpp.cl/wp-content/uploads/2024/11/Photoroom_20250612_184856.jpeg',
-    badge: { texto: 'Nuevo', tipo: 'nuevo' }
-  },
-  {
-    id: 2,
-    nombre: 'Raíz de Valeriana',
-    precio: '15.00',
-    imagen: 'https://natutea.cl/wp-content/uploads/2023/04/VALERIANA-TERMINADO.jpg',
-    badge: null
-  },
-  {
-    id: 3,
-    nombre: 'Menta Piperita',
-    precio: '10.00',
-    imagen: 'https://http2.mlstatic.com/D_NQ_NP_828033-MLC83574114949_042025-O.webp',
-    badge: { texto: 'En Oferta', tipo: 'oferta' }
-  },
-  {
-    id: 4,
-    nombre: 'Lavanda',
-    precio: '14.00',
-    imagen: 'https://www.australisherbolaria.com/cdn/shop/files/flores-de-lavanda-seca.jpg?v=1691516389',
-    badge: null
-  },
-  {
-    id: 5,
-    nombre: 'Ginseng',
-    precio: '22.00',
-    imagen: 'https://fosetter.com/cdn/shop/files/1221692258882_.pic.jpg?v=1692410930&width=2048',
-    badge: null
-  },
-  {
-    id: 6,
-    nombre: 'Jengibre',
-    precio: '9.50',
-    imagen: 'https://ecovalle.pe/wp-content/uploads/2022/08/JENGIBRE-70-GR.jpg',
-    badge: null
-  },
-  {
-    id: 7,
-    nombre: 'Cúrcuma',
-    precio: '11.50',
-    imagen: 'https://shamix.cl/cdn/shop/products/012_700x700.png?v=1640811472',
-    badge: null
-  },
-  {
-    id: 8,
-    nombre: 'Equinácea',
-    precio: '18.00',
-    imagen: 'https://http2.mlstatic.com/D_NQ_NP_992397-MLA96185543655_102025-O.webp',
-    badge: null
-  },
-];
+import { useCart } from '../components/CartContext';
 
 export default function Medicinal() {
+  // 1. CAMBIO: Traemos también 'cartItems' para saber qué hay en el carrito
+  const { addToCart, cartItems } = useCart(); 
+
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [filtroActivo, setFiltroActivo] = useState('Todo');
+
+  // --- 1. ESTADO PARA PAGINACIÓN ---
+  const [paginaActual, setPaginaActual] = useState(1);
+  const productosPorPagina = 12;
+
+  useEffect(() => {
+    const fetchMedicinal = async () => {
+      try {
+        setLoading(true);
+        const data = await productApi.getByCategory('medicinal');
+        console.log("Productos Medicinales:", data); 
+        setProductos(data);
+      } catch (error) {
+        console.error("Error cargando medicinales:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMedicinal();
+  }, []);
+
+  // --- LÓGICA DE FILTRADO ---
+  const productosFiltrados = filtroActivo === 'Todo'
+    ? productos
+    : productos.filter(p => {
+        const tipoProducto = p.tipo ? p.tipo.toLowerCase() : '';
+        const filtro = filtroActivo.toLowerCase();
+        return tipoProducto === filtro;
+      });
+
+  // --- 2. LÓGICA DE CORTE (SLICE) ---
+  const indiceUltimoProducto = paginaActual * productosPorPagina;
+  const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+  const productosVisibles = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
+  
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+
+  // --- 3. HANDLERS ---
+  const handleFiltroClick = (filtro) => {
+    setFiltroActivo(filtro);
+    setPaginaActual(1); // Volver a pag 1 al filtrar
+  };
+
+  const cambiarPagina = (numeroPagina) => {
+    setPaginaActual(numeroPagina);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (loading) return <div className="loading-container" style={{textAlign:'center', padding:'50px'}}>Cargando herbolaria...</div>;
 
   return (
     <div>
       <main className="catalogo-medicinal">
         
+        {/* Banner */}
         <div className="banner-container">
           <div className="banner-content">
             <img 
@@ -78,53 +77,133 @@ export default function Medicinal() {
           </div>
         </div>
 
+        {/* Barra de Filtros */}
         <nav className="filter-bar">
           <ul>
-            <li><button onClick={() => setFiltroActivo('Todo')} className={filtroActivo === 'Todo' ? 'active' : ''}>Todo</button></li>
-            <li><button onClick={() => setFiltroActivo('Relajantes')} className={filtroActivo === 'Spray' ? 'active' : ''}>Spray</button></li>
-            <li><button onClick={() => setFiltroActivo('Energizantes')} className={filtroActivo === 'Roll-on' ? 'active' : ''}>Roll-on</button></li>
-            <li><button onClick={() => setFiltroActivo('Digestión')} className={filtroActivo === 'Serum' ? 'active' : ''}>Serum</button></li>
-            <li><button onClick={() => setFiltroActivo('Estrés')} className={filtroActivo === 'Barra' ? 'active' : ''}>Barra</button></li>
-            <li><button onClick={() => setFiltroActivo('Estrés')} className={filtroActivo === 'Ungüento' ? 'active' : ''}>Ungüento</button></li>
+            {['Todo', 'Spray', 'Roll-on', 'Serum', 'Barra', 'Ungüento'].map((filtro) => (
+               <li key={filtro}>
+                 <button 
+                   onClick={() => handleFiltroClick(filtro)} 
+                   className={filtroActivo === filtro ? 'active' : ''}
+                 >
+                   {filtro}
+                 </button>
+               </li>
+            ))}
           </ul>
         </nav>
 
-        {/* --- 2. GRID DE PRODUCTOS --- */}
+        {/* GRID DE PRODUCTOS */}
         <div className="product-grid-medicinal">
-          {productosMedicinales.map((producto) => (
-            <div className="product-card" key={producto.id}>
-              <div className="card-image-container">
-                {producto.badge && (
-                  <span className={`badge ${producto.badge.tipo}`}>
-                    {producto.badge.texto}
-                  </span>
-                )}
-                <img src={producto.imagen} alt={producto.nombre} />
-              </div>
+          {productosVisibles.length > 0 ? (
+            productosVisibles.map((producto) => {
+              
+              // 2. CAMBIO: Verificamos si este producto ya está en el carrito
+              const yaEnCarrito = cartItems.some(item => item.id === producto.id);
 
-              <div className="card-body">
-                <h3>{producto.nombre}</h3>
-                <p className="price">${producto.precio}</p>
-                <button className="add-to-cart-btn">
-                  <i className="fas fa-shopping-cart"></i>
-                  Lo quiero
-                </button>
-              </div>
+              return (
+                <div className="product-card" key={producto.id}>
+                  
+                  <div className="card-image-container">
+                    {!producto.stock && (
+                      <span className="badge agotado" style={{backgroundColor: '#e74c3c', color: 'white', padding: '5px 10px', borderRadius: '5px', position: 'absolute', top: '10px', right: '10px', zIndex: 10, fontSize: '0.8rem'}}>
+                        Agotado
+                      </span>
+                    )}
+
+                    <img 
+                      src={producto.img_prod} 
+                      alt={producto.nombre_prod} 
+                      className="card-image-fit" 
+                      onError={(e) => { 
+                        e.target.onerror = null; 
+                        e.target.src = 'https://via.placeholder.com/300?text=Sin+Imagen'; 
+                      }}
+                    />
+                  </div>
+
+                  <div className="card-body">
+                    <h3>
+                        <Link to={`/producto/${producto.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            {producto.nombre_prod}
+                        </Link>
+                    </h3>
+                    
+                    <span style={{fontSize: '0.8rem', textTransform: 'uppercase', color: '#888', letterSpacing: '1px'}}>
+                      {producto.tipo_descripcion || producto.tipo}
+                    </span>
+
+                    <p className="beneficios" style={{ fontSize: '0.9em', color: '#666', margin: '5px 0' }}>
+                        {producto.beneficio_prod}
+                    </p>
+
+                    <p className="price">
+                      ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                    </p>
+                    
+                    {/* 3. CAMBIO: Botón Inteligente */}
+                    <button 
+                      className="add-to-cart-btn" 
+                      // Deshabilitamos si no hay stock O si ya está agregado
+                      disabled={!producto.stock || yaEnCarrito} 
+                      
+                      // Ajustamos la opacidad (o color de fondo si quisieras forzarlo más)
+                      style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
+                      
+                      onClick={() => addToCart(producto)}
+                    >
+                      {/* Cambiamos el icono según el estado */}
+                      <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i> 
+                      
+                      {/* Cambiamos el texto según el estado */}
+                      {!producto.stock 
+                          ? ' Sin Stock' 
+                          : yaEnCarrito 
+                              ? ' Agregado' 
+                              : ' Agregar al carrito'}
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div style={{width: '100%', textAlign: 'center', padding: '40px', color: '#666'}}>
+                <h3>No hay productos de tipo "{filtroActivo}" disponibles por el momento.</h3>
             </div>
-          ))}
+          )}
         </div>
 
-        <nav className="pagination-nav">
-          <ul>
-            <li><button aria-label="Página anterior"><i className="fas fa-chevron-left"></i></button></li>
-            <li><button className="active">1</button></li>
-            <li><button>2</button></li>
-            <li><button>3</button></li>
-            <li><span>...</span></li>
-            <li><button>8</button></li>
-            <li><button aria-label="Página siguiente"><i className="fas fa-chevron-right"></i></button></li>
-          </ul>
-        </nav>
+        {/* --- 4. PAGINACIÓN DINÁMICA --- */}
+        {productosFiltrados.length > productosPorPagina && (
+            <div className="pagination-container">
+                <button 
+                    onClick={() => cambiarPagina(paginaActual - 1)}
+                    disabled={paginaActual === 1}
+                    className="pagination-btn"
+                >
+                    <i className="fas fa-chevron-left"></i> Anterior
+                </button>
+
+                {Array.from({ length: totalPaginas }, (_, index) => (
+                    <button
+                        key={index + 1}
+                        onClick={() => cambiarPagina(index + 1)}
+                        className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+
+                <button 
+                    onClick={() => cambiarPagina(paginaActual + 1)}
+                    disabled={paginaActual === totalPaginas}
+                    className="pagination-btn"
+                >
+                    Siguiente <i className="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        )}
+
       </main>
     </div>
   );

@@ -1,9 +1,8 @@
 import React from 'react';
-import './SobreNosotros.css'; // Conexión con el archivo de estilos
+import './SobreNosotros.css'; 
 
 const AboutUs = () => {
-  
-  // Iconos (usando emojis por simplicidad, reemplazables por componentes SVG o FontAwesome)
+
   const icons = {
     leaf: "🌿",
     harvest: "🌾",
@@ -36,7 +35,7 @@ const AboutUs = () => {
         </div>
         <div className="intro-image-wrapper">
           <img 
-            src="https://placehold.co/600x500/e0c090/FFFFFF?text=Flores+y+Madera" 
+            src="./src/assets/1.jpg" 
             alt="Flores y hierbas secas sobre una mesa de madera" 
             className="intro-image" 
           />
@@ -166,16 +165,16 @@ const AboutUs = () => {
           {/* TIENDA 1: PALERMO */}
           <div className="location-card">
             <img 
-              src="https://placehold.co/600x400/2e4a3d/FFFFFF?text=Hojas+Menta" 
+              src="./src/assets/2.jpg" 
               alt="Hojas verdes frescas" 
               className="location-image" 
             />
             <div className="location-details">
-              <h3 className="location-name">Tienda Palermo</h3>
+              <h3 className="location-name">Casa la Escoba</h3>
               
               <div className="location-info-row">
                 <span>📍</span>
-                <p>Av. Santa Fe 3253, CABA</p>
+                <p>Rozas 974, Concepción</p>
               </div>
               
               <div className="location-info-row">
@@ -183,23 +182,23 @@ const AboutUs = () => {
                 <p>Lunes a Sábado: 10am - 8pm</p>
               </div>
 
-              <a href="#mapa-palermo" className="map-link">Ver en mapa</a>
+              <a href="https://www.google.cl/maps/place/Martinez+de+Rosas+-+Juan+Mart%C3%ADnez+de+Rozas+974,+4030284+Concepci%C3%B3n,+B%C3%ADo+B%C3%ADo/data=!4m2!3m1!1s0x9669b5cf26568d6b:0xcc15a6e635af4de3?sa=X&ved=1t:242&ictx=111" target="blank" className="map-link">Ver en mapa</a>
             </div>
           </div>
 
           {/* TIENDA 2: SAN TELMO */}
           <div className="location-card">
             <img 
-              src="https://placehold.co/600x400/4a4a6a/FFFFFF?text=Lavanda" 
+              src="./src/assets/3.jpg" 
               alt="Flores de lavanda" 
               className="location-image" 
             />
             <div className="location-details">
-              <h3 className="location-name">Tienda San Telmo</h3>
+              <h3 className="location-name">Tienda Prana</h3>
               
               <div className="location-info-row">
                 <span>📍</span>
-                <p>Defensa 961, CABA</p>
+                <p>Cochrane 791, Concepción.</p>
               </div>
               
               <div className="location-info-row">
@@ -207,7 +206,7 @@ const AboutUs = () => {
                 <p>Martes a Domingo: 11am - 7pm</p>
               </div>
 
-              <a href="#mapa-santelmo" className="map-link">Ver en mapa</a>
+              <a href="https://www.google.com/maps/place/Cochrane+791,+4030000+Concepci%C3%B3n,+B%C3%ADo+B%C3%ADo/@-36.8288423,-73.0470993,17z/data=!3m1!4b1!4m6!3m5!1s0x9669b5d1510c0de3:0x40ed95855e41d89d!8m2!3d-36.8288423!4d-73.0470993!16s%2Fg%2F11gm_c9gf9?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target='blank' className="map-link">Ver en mapa</a>
             </div>
           </div>
         </div>
