@@ -53,7 +53,6 @@ const AboutUs = () => {
         </div>
 
         <div className="process-cards-grid">
-          {/* Tarjeta 1 */}
           <div className="process-card">
             <div className="process-icon-circle">
               <span>{icons.leaf}</span>
@@ -64,7 +63,7 @@ const AboutUs = () => {
               orgánicos y sostenibles, sin pesticidas ni químicos.
             </p>
           </div>
-          {/* Tarjeta 2 */}
+      
           <div className="process-card">
             <div className="process-icon-circle">
               <span>{icons.harvest}</span>
@@ -75,7 +74,7 @@ const AboutUs = () => {
               preservar sus propiedades medicinales y aromáticas.
             </p>
           </div>
-          {/* Tarjeta 3 */}
+      
           <div className="process-card">
             <div className="process-icon-circle">
               <span>{icons.flask}</span>
@@ -89,8 +88,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-
-      {/* ================== SECCIÓN 3: QUÉ HACE AUKA ================== */}
       <section className="what-we-do-section">
         <div className="centered-header-block">
           <h2 className="centered-title">¿Qué hace Auka?</h2>
@@ -101,7 +98,6 @@ const AboutUs = () => {
         </div>
 
         <div className="offerings-grid">
-          {/* Fila 1 */}
           <div className="offering-card">
             <div className="offering-icon-wrapper"><span>{icons.bulkHerbs}</span></div>
             <div className="offering-content">
@@ -116,8 +112,7 @@ const AboutUs = () => {
               <p className="offering-card-text">Combinaciones expertas para cada momento del día.</p>
             </div>
           </div>
-          
-          {/* Fila 2 */}
+
           <div className="offering-card">
             <div className="offering-icon-wrapper"><span>{icons.tincture}</span></div>
             <div className="offering-content">
@@ -133,7 +128,6 @@ const AboutUs = () => {
             </div>
           </div>
 
-          {/* Fila 3 */}
           <div className="offering-card">
             <div className="offering-icon-wrapper"><span>{icons.personalCare}</span></div>
             <div className="offering-content">
@@ -151,7 +145,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* ================== SECCIÓN 4: DÓNDE ENCONTRARNOS ================== */}
       <section className="locations-section">
         <div className="centered-header-block">
           <h2 className="centered-title">¿Dónde encontrarnos?</h2>
@@ -162,7 +155,6 @@ const AboutUs = () => {
         </div>
 
         <div className="locations-grid">
-          {/* TIENDA 1: PALERMO */}
           <div className="location-card">
             <img 
               src="./src/assets/2.jpg" 
@@ -185,8 +177,6 @@ const AboutUs = () => {
               <a href="https://www.google.cl/maps/place/Martinez+de+Rosas+-+Juan+Mart%C3%ADnez+de+Rozas+974,+4030284+Concepci%C3%B3n,+B%C3%ADo+B%C3%ADo/data=!4m2!3m1!1s0x9669b5cf26568d6b:0xcc15a6e635af4de3?sa=X&ved=1t:242&ictx=111" target="blank" className="map-link">Ver en mapa</a>
             </div>
           </div>
-
-          {/* TIENDA 2: SAN TELMO */}
           <div className="location-card">
             <img 
               src="./src/assets/3.jpg" 

@@ -1,9 +1,7 @@
-/* AboutUs.css */
-
 :root {
-  --color-primary-green: #8e9d73; /* Verde oliva para detalles y botones */
-  --color-bg-cream: #f9f6e8;      /* Crema claro (fondo decorativo) */
-  --color-card-bg: #f4f2e6;       /* Crema un poco más oscuro (fondo tarjetas) */
+  --color-primary-green: #8e9d73; 
+  --color-bg-cream: #f9f6e8;      
+  --color-card-bg: #f4f2e6;       
   --color-text-dark: #333333;
   --color-text-gray: #666666;
   --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -13,11 +11,10 @@
   font-family: var(--font-family);
   color: var(--color-text-dark);
   padding: 60px 20px;
-  max-width: 1100px; /* Ancho máximo para centrar todo el contenido */
+  max-width: 1100px; 
   margin: 0 auto;
 }
 
-/* --- ESTILOS COMUNES PARA TÍTULOS CENTRADOS --- */
 .centered-header-block {
   text-align: center;
   margin-bottom: 60px;
@@ -30,7 +27,6 @@
   display: inline-block;
 }
 
-/* La línea verde decorativa debajo de los títulos centrados */
 .centered-title::after {
   content: '';
   display: block;
@@ -48,9 +44,7 @@
   line-height: 1.6;
 }
 
-/* =========================================
-   SECCIÓN 1: INTRODUCCIÓN (Quiénes somos)
-   ========================================= */
+
 .intro-section {
   display: flex;
   gap: 60px;
@@ -66,7 +60,6 @@
   font-size: 2.5rem;
   margin-bottom: 30px;
   font-weight: 700;
-  /* Nota: Este título tiene la línea decorativa integrada en el diseño original a la izquierda */
   position: relative;
 }
 
@@ -103,10 +96,6 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
   object-fit: cover;
 }
-
-/* =========================================
-   SECCIÓN 2: CÓMO TRABAJA AUKA (Grid Vertical)
-   ========================================= */
 .how-we-work-section {
   margin-bottom: 120px;
 }
@@ -142,7 +131,7 @@
 
 .process-icon-circle span {
   font-size: 2.2rem;
-  color: white; /* Asumiendo que usas emojis o texto blanco */
+  color: white; 
 }
 
 .process-card-title {
@@ -159,9 +148,6 @@
   margin: 0;
 }
 
-/* =========================================
-   SECCIÓN 3: QUÉ HACE AUKA (Grid Horizontal)
-   ========================================= */
 .what-we-do-section {
   margin-bottom: 120px;
 }
@@ -208,9 +194,6 @@
   margin: 0;
 }
 
-/* =========================================
-   SECCIÓN 4: DÓNDE ENCONTRARNOS (Locations)
-   ========================================= */
 .locations-section {
   margin-bottom: 80px;
 }
@@ -224,7 +207,7 @@
 .location-card {
   background-color: var(--color-card-bg);
   border-radius: 16px;
-  overflow: hidden; /* Para que la imagen respete el borde redondeado */
+  overflow: hidden; 
   display: flex;
   flex-direction: column;
 }
@@ -274,9 +257,6 @@
     opacity: 0.8;
 }
 
-/* =========================================
-   RESPONSIVIDAD
-   ========================================= */
 @media (max-width: 960px) {
   .intro-section {
     flex-direction: column;
@@ -289,7 +269,7 @@
   .process-cards-grid,
   .offerings-grid,
   .locations-grid {
-    grid-template-columns: 1fr; /* Todo a una columna en móvil/tablet */
+    grid-template-columns: 1fr; 
     gap: 20px;
   }
 

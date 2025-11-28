@@ -85,8 +85,7 @@
 .home-content {
     padding: 50px 20px;
     max-width: 1200px;
-    margin: 0 auto;
-    background-color: #fff; 
+    margin: 0 auto; 
 }
 
 .home-content h2 {
@@ -134,10 +133,7 @@
     display: flex;
     gap:50px;
     justify-content:center ;
-}
-
-.tarjetas a{
-    color: ;
+    
 }
 
 .tarjeta-categoria {
@@ -150,6 +146,7 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
+    background-color: white;
 }
 .tarjeta-categoria i {
     color: #618814;

@@ -1,48 +1,58 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { useCart } from './CartContext'; // Asegúrate de importar el contexto
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useCart } from './CartContext'; 
 import './Navbar.css';
 
 export default function Navbar() {
-  const { cartItems, removeFromCart } = useCart(); // Traemos los productos del carrito
-  const [isCartOpen, setIsCartOpen] = useState(false); // Para abrir/cerrar el desplegable
+  const { cartItems, removeFromCart } = useCart(); 
+  const [isCartOpen, setIsCartOpen] = useState(false); 
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  // --- LÓGICA DE WHATSAPP ---
- const handleConsultarStock = () => {
-    // 1. Saludo
+  const handleConsultarStock = () => {
     const hora = new Date().getHours();
-    const saludo = hora >= 6 && hora < 20 ? "Buenos días" : "Buenas noches";
+    const saludo = hora >= 6 && hora < 20 ? "Buenos días ☀️" : "Buenas noches 🌙";
+    const total = cartItems.reduce((acc, item) => acc + Number(item.precio_prod || 0), 0);
 
-    // 2. Lista de productos
-    // Usamos \n para saltos de línea normales
-    const listaProductos = cartItems.map(item => `- ${item.nombre_prod}`).join('\n');
+    const listaProductos = cartItems.map(item => 
+      `🌱 *${item.nombre_prod}*\n   Valor: $${Number(item.precio_prod || 0).toLocaleString('es-CL')}`
+    ).join('\n\n');
 
-    // 3. Texto completo SIN codificar todavía
-    const mensajeTexto = `${saludo}, me gustaría consultar el stock de:\n\n${listaProductos}`;
+    const mensajeTexto = 
+      `${saludo}, espero que se encuentre muy bien.\n\n` +
+      `Le escribo para consultar la disponibilidad de los siguientes productos seleccionados en la web *AUKA*:\n\n` +
+      `${listaProductos}\n\n` +
+      `----------------------------\n` +
+      `💰 *Total estimado:* $${total.toLocaleString('es-CL')}\n\n` +
+      `Quedo atento a su confirmación para coordinar. ¡Muchas gracias! 🍃`;
 
-    // 4. Tu número (CÁMBIALO)
-    const numeroTelefono = "+56984038859"; 
-
-    // 5. CODIFICACIÓN SEGURA
-    // encodeURIComponent convierte los espacios y enters en símbolos que el navegador entiende
+    const numeroTelefono = "+56985125667"; 
     const mensajeCodificado = encodeURIComponent(mensajeTexto);
-
-    // 6. USAR "api.whatsapp.com" EN LUGAR DE "wa.me"
-    // Este formato es mucho más confiable para la App de escritorio
     const url = `https://api.whatsapp.com/send?phone=${numeroTelefono}&text=${mensajeCodificado}`;
     
     window.open(url, '_blank');
   };
+
+
+  const handleSearch = (e) => {
+    if ((e.type === 'keydown' && e.key === 'Enter') || e.type === 'click') {
+        if (searchTerm.trim() !== "") {
+            navigate(`/busqueda?q=${encodeURIComponent(searchTerm)}`);
+            setSearchTerm(""); 
+            setIsCartOpen(false); 
+        }
+    }
+  };
+
   return (
     <div className="navbar-container">
-      {/* Logo */}
       <div className="navbar-logo">
         <Link to="/">
           🍃 <h2>AUKA</h2>
         </Link>
       </div>
 
-      {/* Menú de navegación */}
       <nav className="navbar-links">
         <ul>
           <li><NavLink to="/" end>Inicio</NavLink></li>
@@ -54,30 +64,34 @@ export default function Navbar() {
         </ul>
       </nav>
 
-      {/* Parte derecha: Buscador + Carrito */}
       <div className="navbar-right">
-        
-        {/* Buscador */}
+
         <div className="navbar-search">
-          <input type="text" placeholder="Buscar productos..." />
-          <i className="fas fa-search"></i>
+          <input 
+            type="text" 
+            placeholder="Buscar productos..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleSearch}
+          />
+          <i 
+            className="fas fa-search" 
+            onClick={handleSearch} 
+            style={{cursor: 'pointer'}}
+          ></i>
         </div>
 
-        {/* Icono del Carrito */}
         <div 
             className="navbar-cart-btn" 
-            onClick={() => setIsCartOpen(!isCartOpen)} // Abre/Cierra al hacer clic
+            onClick={() => setIsCartOpen(!isCartOpen)} 
         >
           <i className="fas fa-shopping-cart"></i>
-          {/* Numerito rojo contador */}
           {cartItems.length > 0 && <span className="cart-badge">{cartItems.length}</span>}
         </div>
 
-        {/* --- DESPLEGABLE DEL CARRITO --- */}
         {isCartOpen && (
           <div className="cart-dropdown">
             <h4>Tu selección de consulta</h4>
-            
             {cartItems.length === 0 ? (
               <p>No has seleccionado nada aún.</p>
             ) : (
@@ -85,29 +99,22 @@ export default function Navbar() {
                 <ul className="cart-items-list">
                   {cartItems.map((item, index) => (
                     <li key={index} className="cart-item">
-                      {/* Imagen pequeña */}
                       <img 
                         src={item.img_prod} 
                         alt="mini" 
                         className="cart-thumb"
                         onError={(e) => e.target.src = 'https://via.placeholder.com/40'}
                       />
-                      
-                      {/* Info del producto */}
                       <div className="cart-item-info">
                           <span>{item.nombre_prod}</span>
                           <small>{item.tipo || "Producto"}</small>
                       </div>
-
-                      {/* Botón borrar uno */}
                       <button onClick={() => removeFromCart(index)} className="btn-remove">
                           <i className="fas fa-trash"></i>
                       </button>
                     </li>
                   ))}
                 </ul>
-                
-                {/* BOTÓN WHATSAPP */}
                 <button className="btn-whatsapp-consultar" onClick={handleConsultarStock}>
                     <i className="fab fa-whatsapp"></i> Ir a Consultar
                 </button>
@@ -115,7 +122,6 @@ export default function Navbar() {
             )}
           </div>
         )}
-
       </div>
     </div>
   );

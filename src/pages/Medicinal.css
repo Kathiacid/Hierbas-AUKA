@@ -73,7 +73,7 @@
   padding: 15px;
   width: 100%;
   height: 100%;
-  box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+  box-sizing: border-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
@@ -124,19 +124,16 @@
 .badge.oferta { background-color: #e74c3c; } 
 .badge.agotado { background-color: #999; }
 
-/* --- CORRECCIONES CRÍTICAS DE CONTENEDOR --- */
 .card-body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  
-  /* Propiedades clave para contener hijos flexibles */
   width: 100%;
   min-width: 0; 
   max-width: 100%;
-  overflow: hidden; /* Cortafuegos final */
+  overflow: hidden;
 }
 
 .card-body h3 {
@@ -235,29 +232,21 @@
   font-size: 0.75rem;
 }
 
-/* --- CLASE BENEFICIOS ACTUALIZADA --- */
 .beneficios {
     font-size: 0.9rem;
     color: #666;
     margin: 0 0 10px 0;
-    
-    /* Asegura el ancho y padding */
     width: 100%;
     padding: 0 5px; 
-    box-sizing: border-box; /* El padding no aumenta el ancho total */
-    
-    /* Magia para cortar texto */
+    box-sizing: border-box; 
     display: -webkit-box;
     -webkit-line-clamp: 2;        
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    
-    /* Rompe palabras largas si es necesario */
     overflow-wrap: break-word; 
     word-wrap: break-word;
-    word-break: break-word; 
-    
+    word-break: break-word;  
     min-height: 42px;
 }
 
@@ -288,7 +277,7 @@
 }
 
 .pagination-number.active {
-    background-color: #333; /* Color principal de tu marca */
+    background-color: #333;
     color: white;
     border-color: #333;
 }
@@ -301,15 +290,14 @@
 
 .add-to-cart-btn:disabled,
 .cosmetica-btn:disabled {
-  background-color: #555 !important; /* El gris oscuro de Servicios */
+  background-color: #555 !important; 
   color: white !important;
-  cursor: not-allowed; /* Muestra el cursor de prohibido */
-  box-shadow: none;    /* Quita el brillo verde */
-  transform: none;     /* Evita que se mueva */
-  opacity: 0.8;        /* Un poco de transparencia para que se vea elegante */
+  cursor: not-allowed; 
+  box-shadow: none;    
+  transform: none; 
+  opacity: 0.8;   
 }
 
-/* Aseguramos que el hover no cambie el color si está bloqueado */
 .add-to-cart-btn:disabled:hover,
 .cosmetica-btn:disabled:hover {
   background-color: #555 !important;

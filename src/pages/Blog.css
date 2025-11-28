@@ -1,21 +1,18 @@
-    /* Blog.css Actualizado */
-
-    :root {
+:root {
     --color-bg-cream: #f9f6e8;
     --color-primary-green: #8e9d73;
     --color-text-dark: #333333;
     --color-text-gray: #666666;
     --color-white: #ffffff;
-    --bg-color-main: #fcfcfc; /* Un fondo general muy suave */
+    --bg-color-main: #fcfcfc; 
     }
 
-    body {
+body {
     background-color: var(--bg-color-main);
     }
 
-    /* --- ESTRUCTURA PRINCIPAL Y MODO NORMAL --- */
 
-    .main-blog-wrapper {
+.main-blog-wrapper {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
@@ -23,31 +20,27 @@
     transition: all 0.3s ease;
     }
 
-    .blog-title-main {
+.blog-title-main {
     text-align: center;
     color: var(--color-primary-green);
     margin-bottom: 40px;
     font-size: 2.5rem;
     }
 
-    /* El contenedor flexible que sujetará la izquierda y la derecha */
-    .content-area-flex {
+
+.content-area-flex {
     display: flex;
     gap: 40px;
     position: relative;
     }
 
-    /* La lista de posts en modo normal (centrada) */
     .posts-list-wrapper {
     flex: 1;
-    max-width: 900px; /* Ancho máximo para la lista normal */
-    margin: 0 auto;   /* Centrado */
+    max-width: 900px;
+    margin: 0 auto;  
     transition: all 0.4s ease;
     }
 
-
-    /* --- ESTILOS DE LA TARJETA (CARD) EXISTENTES --- */
-    /* (Estos son casi iguales al anterior, solo ajustes menores) */
     .blog-card {
     display: flex;
     background-color: var(--color-white);
@@ -83,7 +76,7 @@
     height: auto;
     object-fit: cover;
     border-radius: 8px;
-    aspect-ratio: 3/4; /* Mantiene las imágenes verticales */
+    aspect-ratio: 3/4; 
     }
 
     .card-content {
@@ -111,7 +104,6 @@
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 25px;
-    /* Límitar a 3 líneas y poner puntos suspensivos */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -134,30 +126,22 @@
     background-color: #7a8860;
     }
 
-
-    /* =========================================
-    NUEVOS ESTILOS PARA EL MODO DIVIDIDO (SPLIT SCREEN)
-    ========================================= */
-
-    /* Cuando el modo dividido está activo, el wrapper principal se expande */
     .main-blog-wrapper.split-mode-active {
-    max-width: 1400px; /* Permitimos más ancho total */
+    max-width: 1400px; 
     padding-top: 20px;
     }
 
-    /* --- PANEL IZQUIERDO (Artículo Completo) --- */
     .full-article-container {
-    flex: 2; /* Toma 2/3 del espacio (aprox 66%) */
+    flex: 2; 
     background-color: var(--color-white);
     padding: 40px;
     border-radius: 16px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-    height: fit-content; /* Se ajusta a su contenido */
+    height: fit-content; 
     position: sticky;
-    top: 20px; /* Si la lista derecha es muy larga, esto mantiene el artículo visible al hacer scroll */
+    top: 20px; 
     }
 
-    /* Animación de entrada suave para el panel izquierdo */
     @keyframes slideInLeft {
     from { opacity: 0; transform: translateX(-20px); }
     to { opacity: 1; transform: translateX(0); }
@@ -194,7 +178,6 @@
     margin-bottom: 25px;
     }
 
-    /* Estilos para el cuerpo del texto (HTML inyectado) */
     .article-body-text p {
     margin-bottom: 20px;
     line-height: 1.8;
@@ -209,24 +192,17 @@
     font-size: 1.5rem;
     }
 
-
-    /* --- PANEL DERECHO (Lista en modo Sidebar) --- */
-
-    /* Cuando el modo sidebar está activo en la lista */
     .posts-list-wrapper.sidebar-mode {
-    flex: 1; /* Toma 1/3 del espacio (aprox 33%) */
-    margin: 0; /* Ya no está centrado */
-    max-width: none; /* Quitamos la restricción de ancho */
-
-    /* Hacemos la lista scrolleable si es muy larga */
+    flex: 1; 
+    margin: 0; 
+    max-width: none;
     max-height: 90vh;
     overflow-y: auto;
-    padding-right: 10px; /* Espacio para la barra de scroll */
+    padding-right: 10px; 
     }
 
-    /* Modificaciones a las TARJETAS cuando están en la barra lateral */
     .posts-list-wrapper.sidebar-mode .blog-card {
-    flex-direction: column; /* Las tarjetas se vuelven verticales para ahorrar espacio */
+    flex-direction: column; 
     align-items: flex-start;
     gap: 15px;
     padding: 20px;
@@ -245,7 +221,7 @@
     }
 
     .posts-list-wrapper.sidebar-mode .card-image {
-    aspect-ratio: 16/9; /* Las imágenes se vuelven más horizontales en el sidebar */
+    aspect-ratio: 16/9; 
     height: 180px;
     }
 
@@ -254,7 +230,7 @@
     }
 
     .posts-list-wrapper.sidebar-mode .card-title {
-    font-size: 1.3rem; /* Título más pequeño */
+    font-size: 1.3rem;
     margin-bottom: 8px;
     }
 
@@ -265,34 +241,29 @@
 
     .posts-list-wrapper.sidebar-mode .card-description {
     font-size: 0.85rem;
-    -webkit-line-clamp: 2; /* Solo 2 líneas de descripción */
+    -webkit-line-clamp: 2; 
     margin-bottom: 15px;
     }
 
     .posts-list-wrapper.sidebar-mode .read-more-btn {
-    width: 100%; /* Botón ancho completo en sidebar */
+    width: 100%; 
     text-align: center;
     padding: 8px;
     }
 
-    /* Resaltar la tarjeta activa en el sidebar */
     .active-card-in-list {
     border: 2px solid var(--color-primary-green);
-    background-color: #f4f7f0; /* Un fondo verde muy muy claro */
+    background-color: #f4f7f0; 
     }
 
-
-    /* --- RESPONSIVIDAD --- */
     @media (max-width: 900px) {
-    /* En tablets/móviles, volvemos a una sola columna */
     .content-area-flex {
         flex-direction: column;
     }
 
     .posts-list-wrapper.sidebar-mode {
-        /* Si estamos en modo dividido en móvil, la lista pasa debajo del artículo */
         order: 2; 
-        max-height: none; /* Quitamos el scroll interno */
+        max-height: none; 
         margin-top: 40px;
     }
 
@@ -307,7 +278,6 @@
     }
 
     @media (max-width: 768px) {
-    /* Ajustes para las tarjetas normales en móvil */
     .blog-card {
     flex-direction: column;
     }

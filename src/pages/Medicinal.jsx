@@ -5,14 +5,11 @@ import './Medicinal.css';
 import { useCart } from '../components/CartContext';
 
 export default function Medicinal() {
-  // 1. CAMBIO: Traemos también 'cartItems' para saber qué hay en el carrito
   const { addToCart, cartItems } = useCart(); 
 
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtroActivo, setFiltroActivo] = useState('Todo');
-
-  // --- 1. ESTADO PARA PAGINACIÓN ---
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 12;
 
@@ -33,7 +30,7 @@ export default function Medicinal() {
     fetchMedicinal();
   }, []);
 
-  // --- LÓGICA DE FILTRADO ---
+
   const productosFiltrados = filtroActivo === 'Todo'
     ? productos
     : productos.filter(p => {
@@ -42,17 +39,16 @@ export default function Medicinal() {
         return tipoProducto === filtro;
       });
 
-  // --- 2. LÓGICA DE CORTE (SLICE) ---
+
   const indiceUltimoProducto = paginaActual * productosPorPagina;
   const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
   const productosVisibles = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
   
   const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
 
-  // --- 3. HANDLERS ---
   const handleFiltroClick = (filtro) => {
     setFiltroActivo(filtro);
-    setPaginaActual(1); // Volver a pag 1 al filtrar
+    setPaginaActual(1); 
   };
 
   const cambiarPagina = (numeroPagina) => {
@@ -65,8 +61,6 @@ export default function Medicinal() {
   return (
     <div>
       <main className="catalogo-medicinal">
-        
-        {/* Banner */}
         <div className="banner-container">
           <div className="banner-content">
             <img 
@@ -77,28 +71,23 @@ export default function Medicinal() {
           </div>
         </div>
 
-        {/* Barra de Filtros */}
         <nav className="filter-bar">
           <ul>
             {['Todo', 'Spray', 'Roll-on', 'Serum', 'Barra', 'Ungüento'].map((filtro) => (
-               <li key={filtro}>
-                 <button 
-                   onClick={() => handleFiltroClick(filtro)} 
-                   className={filtroActivo === filtro ? 'active' : ''}
-                 >
-                   {filtro}
-                 </button>
-               </li>
+              <li key={filtro}>
+                <button 
+                  onClick={() => handleFiltroClick(filtro)} 
+                  className={filtroActivo === filtro ? 'active' : ''}
+                >
+                  {filtro}
+                </button>
+              </li>
             ))}
           </ul>
         </nav>
-
-        {/* GRID DE PRODUCTOS */}
         <div className="product-grid-medicinal">
           {productosVisibles.length > 0 ? (
             productosVisibles.map((producto) => {
-              
-              // 2. CAMBIO: Verificamos si este producto ya está en el carrito
               const yaEnCarrito = cartItems.some(item => item.id === producto.id);
 
               return (
@@ -140,22 +129,15 @@ export default function Medicinal() {
                     <p className="price">
                       ${Number(producto.precio_prod).toLocaleString('es-CL')}
                     </p>
-                    
-                    {/* 3. CAMBIO: Botón Inteligente */}
                     <button 
                       className="add-to-cart-btn" 
-                      // Deshabilitamos si no hay stock O si ya está agregado
                       disabled={!producto.stock || yaEnCarrito} 
-                      
-                      // Ajustamos la opacidad (o color de fondo si quisieras forzarlo más)
                       style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
                       
                       onClick={() => addToCart(producto)}
                     >
-                      {/* Cambiamos el icono según el estado */}
                       <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i> 
-                      
-                      {/* Cambiamos el texto según el estado */}
+
                       {!producto.stock 
                           ? ' Sin Stock' 
                           : yaEnCarrito 
@@ -173,7 +155,6 @@ export default function Medicinal() {
           )}
         </div>
 
-        {/* --- 4. PAGINACIÓN DINÁMICA --- */}
         {productosFiltrados.length > productosPorPagina && (
             <div className="pagination-container">
                 <button 

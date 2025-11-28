@@ -4,9 +4,6 @@ import './Blog.css';
 const Blog = () => {
 
 const [selectedPost, setSelectedPost] = useState(null);
-
-// DATOS DE EJEMPLO ACTUALIZADOS
-// He añadido un campo 'fullContent' con texto de relleno largo.
 const mockPosts = [
 {
     id: 1,
@@ -51,31 +48,22 @@ const mockPosts = [
 }
 ];
 
-// [NUEVO] Función para manejar el clic en "Leer Más"
 const handleReadMore = (post) => {
 setSelectedPost(post);
-// Opcional: hacer scroll hacia arriba suavemente al abrir
 window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// [NUEVO] Función para cerrar el artículo
 const handleCloseArticle = () => {
 setSelectedPost(null);
 };
 
 
 return (
-// [MODIFICADO] El contenedor principal cambia de clase si hay un post seleccionado
 <div className={`main-blog-wrapper ${selectedPost ? 'split-mode-active' : ''}`}>
-    
-    {/* Título principal (se oculta en modo dividido para ganar espacio) */}
     {!selectedPost && <h1 className="blog-title-main">Nuestro Blog</h1>}
 
 
     <div className="content-area-flex">
-    
-    {/* --- SECCIÓN IZQUIERDA: VISOR DEL ARTÍCULO COMPLETO --- */}
-    {/* Solo se renderiza si selectedPost NO es null */}
     {selectedPost && (
         <main className="full-article-container left-panel-animation">
         <button className="close-btn" onClick={handleCloseArticle}>
@@ -89,7 +77,6 @@ return (
             className="full-article-hero-image" 
             />
             <h1 className="full-article-title">{selectedPost.title}</h1>
-            {/* Usamos dangerouslySetInnerHTML para renderizar los párrafos HTML del mock data */}
             <div 
             className="article-body-text"
             dangerouslySetInnerHTML={{ __html: selectedPost.fullContent }}
@@ -98,12 +85,8 @@ return (
         </main>
     )}
 
-
-    {/* --- SECCIÓN DERECHA: LISTA DE POSTS --- */}
-    {/* Esta sección siempre está presente, pero su estilo cambia en el CSS cuando está en modo sidebar */}
     <aside className={`posts-list-wrapper ${selectedPost ? 'sidebar-mode' : ''}`}>
         {mockPosts.map((post) => {
-            // Opcional: Marcar visualmente el post activo en la lista derecha
             const isActive = selectedPost && selectedPost.id === post.id;
 
             return (
@@ -117,8 +100,6 @@ return (
             <h2 className="card-title">{post.title}</h2>
             <div className="title-divider"></div>
             <p className="card-description">{post.description}</p>
-            
-            {/* [MODIFICADO] El botón ahora llama a handleReadMore */}
             <button 
                 className="read-more-btn"
                 onClick={() => handleReadMore(post)}

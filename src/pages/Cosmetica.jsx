@@ -5,14 +5,10 @@ import './Cosmetica.css';
 import { useCart } from '../components/CartContext';
 
 export default function Cosmetica() {
-  // 1. CAMBIO: Traemos 'cartItems' para verificar duplicados
   const { addToCart, cartItems } = useCart(); 
-  
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtroActivo, setFiltroActivo] = useState('Todo');
-  
-  // 1. ESTADO PARA PAGINACIÓN
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 12;
 
@@ -32,7 +28,6 @@ export default function Cosmetica() {
     fetchCosmetica();
   }, []);
 
-  // --- FILTRADO ---
   const productosFiltrados = filtroActivo === 'Todo' 
     ? productos 
     : productos.filter(p => {
@@ -41,21 +36,15 @@ export default function Cosmetica() {
         return tipoProducto === filtro;
       });
 
-  // 2. LÓGICA DE CORTE (SLICE) PARA PAGINACIÓN
   const indiceUltimoProducto = paginaActual * productosPorPagina;
   const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
   const productosVisibles = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
-
-  // Calcular el número total de páginas
   const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
 
-  // 3. RESETEAR PÁGINA AL FILTRAR
   const handleFiltroClick = (filtro) => {
     setFiltroActivo(filtro);
     setPaginaActual(1);
   };
-
-  // Función para cambiar de página
   const cambiarPagina = (numeroPagina) => {
     setPaginaActual(numeroPagina);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -90,8 +79,6 @@ export default function Cosmetica() {
       <div className="cosmetica-grid">
         {productosVisibles.length > 0 ? (
           productosVisibles.map((producto) => {
-            
-            // 2. CAMBIO: Verificamos si ya está en el carrito
             const yaEnCarrito = cartItems.some(item => item.id === producto.id);
 
             return (
@@ -133,11 +120,8 @@ export default function Cosmetica() {
                           ${Number(producto.precio_prod).toLocaleString('es-CL')}
                         </p>
                       </div>
-
-                      {/* 3. CAMBIO: Botón Inteligente */}
                       <button 
                         className="add-to-cart-btn" 
-                        // Desactivar si no hay stock O si ya está agregado
                         disabled={!producto.stock || yaEnCarrito} 
                         style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
                         onClick={() => addToCart(producto)}
@@ -161,7 +145,6 @@ export default function Cosmetica() {
         )}
       </div>
 
-      {/* 4. CONTROLES DE PAGINACIÓN */}
       {productosFiltrados.length > productosPorPagina && (
         <div className="pagination-container">
             <button 
