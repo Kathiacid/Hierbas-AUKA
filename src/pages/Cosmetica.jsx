@@ -6,6 +6,7 @@ import { useCart } from '../components/CartContext';
 
 export default function Cosmetica() {
   const { addToCart, cartItems } = useCart(); 
+
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtroActivo, setFiltroActivo] = useState('Todo');
@@ -65,15 +66,18 @@ export default function Cosmetica() {
       </div>
 
       <nav className="cosmetica-filter-bar">
-        {['Todo', 'Spray', 'Roll-on', 'Serum', 'Barra', 'Ungüento'].map(filtro => (
-          <button 
-            key={filtro}
-            onClick={() => handleFiltroClick(filtro)} 
-            className={filtroActivo === filtro ? 'active' : ''}
-          >
-            {filtro}
-          </button>
-        ))}
+        <ul>
+            {['Todo', 'Spray', 'Roll-on', 'Serum', 'Barra', 'Ungüento'].map((filtro) => (
+              <li key={filtro}>
+                <button 
+                  onClick={() => handleFiltroClick(filtro)} 
+                  className={filtroActivo === filtro ? 'active' : ''}
+                >
+                  {filtro}
+                </button>
+              </li>
+            ))}
+          </ul>
       </nav>
       
       <div className="cosmetica-grid">
@@ -84,7 +88,13 @@ export default function Cosmetica() {
             return (
                 <div className="cosmetica-card" key={producto.id}>
                   
-                  {producto.stock === false && <div className="cosmetica-offer-tag" style={{background:'red'}}>AGOTADO</div>}
+                  {/* --- ETIQUETAS FLOTANTES --- */}
+                  {!producto.stock ? (
+                      <div className="cosmetica-offer-tag" style={{background:'red'}}>AGOTADO</div>
+                  ) : producto.tiene_descuento ? (
+                      <div className="cosmetica-offer-tag" style={{background:'#d9822b'}}>OFERTA</div>
+                  ) : null}
+                  {/* --------------------------- */}
 
                   <div className="cosmetica-image-container">
                       <img 
@@ -116,23 +126,35 @@ export default function Cosmetica() {
                       </div>
 
                       <div className="cosmetica-prices">
-                        <p className="cosmetica-price">
-                          ${Number(producto.precio_prod).toLocaleString('es-CL')}
-                        </p>
+                        {producto.tiene_descuento ? (
+                          <>
+                            <span className="precio-antiguo" style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.9em', marginRight: '10px' }}>
+                              ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                            </span>
+                            <span className="precio-nuevo" style={{ color: '#e74c3c', fontWeight: 'bold', fontSize: '1.2em' }}>
+                              ${Number(producto.precio_actual).toLocaleString('es-CL')}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="precio-normal" style={{ color: '#4CA54C', fontWeight: 'bold', fontSize: '1.2em' }}>
+                            ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                          </span>
+                        )}
                       </div>
+                      
                       <button 
-                        className="add-to-cart-btn" 
+                        className={`add-to-cart-btn ${yaEnCarrito ? 'btn-deshabilitado' : ''}`} 
                         disabled={!producto.stock || yaEnCarrito} 
                         style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
-                        onClick={() => addToCart(producto)}
+                        onClick={() => addToCart(producto, 1)}
                       >
-                        <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i> 
-                        
-                        {!producto.stock 
-                            ? 'Sin Stock' 
-                            : yaEnCarrito 
-                                ? 'Agregado' 
-                                : 'Agregar al carrito'}
+                         {!producto.stock ? (
+                            'Sin Stock'
+                         ) : yaEnCarrito ? (
+                            <><i className="fas fa-check"></i> En el carrito</>
+                         ) : (
+                            <><i className="fa-solid fa-cart-shopping"></i> Agregar</>
+                         )}
                       </button>
                   </div>
                 </div>
@@ -147,34 +169,14 @@ export default function Cosmetica() {
 
       {productosFiltrados.length > productosPorPagina && (
         <div className="pagination-container">
-            <button 
-                onClick={() => cambiarPagina(paginaActual - 1)}
-                disabled={paginaActual === 1}
-                className="pagination-btn"
-            >
-                Anterior
-            </button>
-
+            {/* ... Paginación igual ... */}
+            <button onClick={() => cambiarPagina(paginaActual - 1)} disabled={paginaActual === 1} className="pagination-btn"> Anterior </button>
             {Array.from({ length: totalPaginas }, (_, index) => (
-                <button
-                    key={index + 1}
-                    onClick={() => cambiarPagina(index + 1)}
-                    className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}
-                >
-                    {index + 1}
-                </button>
+                <button key={index + 1} onClick={() => cambiarPagina(index + 1)} className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}> {index + 1} </button>
             ))}
-
-            <button 
-                onClick={() => cambiarPagina(paginaActual + 1)}
-                disabled={paginaActual === totalPaginas}
-                className="pagination-btn"
-            >
-                Siguiente
-            </button>
+            <button onClick={() => cambiarPagina(paginaActual + 1)} disabled={paginaActual === totalPaginas} className="pagination-btn"> Siguiente </button>
         </div>
       )}
-
     </div>
   );
 }

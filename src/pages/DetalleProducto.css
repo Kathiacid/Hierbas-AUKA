@@ -172,26 +172,49 @@ justify-content: center;
     font-weight: 600;
 
 }
+/* Botón principal de agregar al carrito (Estilo Medicinal) */
 .btn-add-cart {
-background-color: #889c6b;
-color: white;
-border: none;
-border-radius: 10px;
-padding: 15px 30px;
-font-size: 1.1rem;
-font-weight: 600;
-cursor: pointer;
-width: 100%;
-transition: background-color 0.3s, transform 0.2s;
-display: flex; 
-justify-content: center; 
-align-items: center; 
-gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #4CA54C; /* Mismo verde que medicinal */
+  color: white;
+  border: none;
+  padding: 12px 20px;       /* Mismo padding */
+  border-radius: 30px;      /* Borde redondeado tipo cápsula */
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;              /* Ocupa el ancho disponible */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(76, 165, 76, 0.2); /* Sombra suave verde */
+  font-family: 'Poppins', sans-serif; /* Asegura la misma fuente */
 }
 
 .btn-add-cart:hover {
-background-color: #6f8255;
-transform: translateY(-2px);
+  background-color: #3d8b3d; /* Un poco más oscuro al pasar el mouse */
+  transform: translateY(-2px); /* Pequeña elevación */
+  box-shadow: 0 6px 12px rgba(76, 165, 76, 0.3);
+}
+
+/* Estilo para cuando está deshabilitado (Sin stock o Agregado) */
+.btn-add-cart:disabled {
+  background-color: #555 !important; /* Gris oscuro para consistencia */
+  color: white !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  opacity: 0.8;
+}
+
+/* ESTADO AGREGADO (Gris específico si quieres diferenciarlo, o usa el disabled general) */
+/* En tu lógica actual usas 'disabled' cuando ya está en carrito, así que la regla de arriba aplica. */
+/* Si quisieras un gris diferente solo para "En el carrito": */
+.btn-add-cart.btn-agregado {
+  background-color: #6c757d !important; 
+  cursor: default;
+  pointer-events: none; 
 }
 
 .divider {
@@ -242,4 +265,39 @@ gap: 40px;
 .thumbnails-row {
 justify-content: center; 
 }
+}
+
+/* Sección inferior de descripción */
+.detalle-bottom-description {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.detalle-bottom-description h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+/* Pequeño subrayado verde decorativo para el título */
+.detalle-bottom-description h3::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background-color: #4CA54C;
+  bottom: -5px;
+  left: 0;
+  border-radius: 2px;
+}
+
+.detalle-bottom-description .desc-content p {
+  color: #555;
+  line-height: 1.8;
+  font-size: 1rem;
+  max-width: 800px; /* Para que no se lea muy ancho en pantallas grandes */
 }

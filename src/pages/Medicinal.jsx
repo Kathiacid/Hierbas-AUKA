@@ -18,7 +18,6 @@ export default function Medicinal() {
       try {
         setLoading(true);
         const data = await productApi.getByCategory('medicinal');
-        console.log("Productos Medicinales:", data); 
         setProductos(data);
       } catch (error) {
         console.error("Error cargando medicinales:", error);
@@ -30,7 +29,6 @@ export default function Medicinal() {
     fetchMedicinal();
   }, []);
 
-
   const productosFiltrados = filtroActivo === 'Todo'
     ? productos
     : productos.filter(p => {
@@ -38,7 +36,6 @@ export default function Medicinal() {
         const filtro = filtroActivo.toLowerCase();
         return tipoProducto === filtro;
       });
-
 
   const indiceUltimoProducto = paginaActual * productosPorPagina;
   const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
@@ -94,11 +91,18 @@ export default function Medicinal() {
                 <div className="product-card" key={producto.id}>
                   
                   <div className="card-image-container">
-                    {!producto.stock && (
+                    
+                    {/* --- ETIQUETAS --- */}
+                    {!producto.stock ? (
                       <span className="badge agotado" style={{backgroundColor: '#e74c3c', color: 'white', padding: '5px 10px', borderRadius: '5px', position: 'absolute', top: '10px', right: '10px', zIndex: 10, fontSize: '0.8rem'}}>
                         Agotado
                       </span>
-                    )}
+                    ) : producto.tiene_descuento ? (
+                      <span className="badge oferta" style={{backgroundColor: '#d9822b', color: 'white', padding: '5px 10px', borderRadius: '5px', position: 'absolute', top: '10px', right: '10px', zIndex: 10, fontSize: '0.8rem'}}>
+                        OFERTA
+                      </span>
+                    ) : null}
+                    {/* ---------------- */}
 
                     <img 
                       src={producto.img_prod} 
@@ -127,22 +131,35 @@ export default function Medicinal() {
                     </p>
 
                     <p className="price">
-                      ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                      {producto.tiene_descuento ? (
+                        <>
+                          <span className="precio-antiguo" style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.9em', marginRight: '10px' }}>
+                            ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                          </span>
+                          <span className="precio-nuevo" style={{ color: '#e74c3c', fontWeight: 'bold', fontSize: '1.2em' }}>
+                            ${Number(producto.precio_actual).toLocaleString('es-CL')}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="precio-normal" style={{ color: '#4CA54C', fontWeight: 'bold', fontSize: '1.2em' }}>
+                          ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                        </span>
+                      )}
                     </p>
+
                     <button 
-                      className="add-to-cart-btn" 
+                      className={`add-to-cart-btn ${yaEnCarrito ? 'btn-deshabilitado' : ''}`} 
                       disabled={!producto.stock || yaEnCarrito} 
                       style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
-                      
-                      onClick={() => addToCart(producto)}
+                      onClick={() => addToCart(producto, 1)}
                     >
-                      <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i> 
-
-                      {!producto.stock 
-                          ? ' Sin Stock' 
-                          : yaEnCarrito 
-                              ? ' Agregado' 
-                              : ' Agregar al carrito'}
+                      {!producto.stock ? (
+                          'Sin Stock'
+                      ) : yaEnCarrito ? (
+                          <><i className="fas fa-check"></i> En el carrito</>
+                      ) : (
+                          <><i className="fa-solid fa-cart-shopping"></i> Agregar</>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -157,34 +174,14 @@ export default function Medicinal() {
 
         {productosFiltrados.length > productosPorPagina && (
             <div className="pagination-container">
-                <button 
-                    onClick={() => cambiarPagina(paginaActual - 1)}
-                    disabled={paginaActual === 1}
-                    className="pagination-btn"
-                >
-                    <i className="fas fa-chevron-left"></i> Anterior
-                </button>
-
+               {/* ... Paginación igual ... */}
+                <button onClick={() => cambiarPagina(paginaActual - 1)} disabled={paginaActual === 1} className="pagination-btn"> <i className="fas fa-chevron-left"></i> Anterior </button>
                 {Array.from({ length: totalPaginas }, (_, index) => (
-                    <button
-                        key={index + 1}
-                        onClick={() => cambiarPagina(index + 1)}
-                        className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}
-                    >
-                        {index + 1}
-                    </button>
+                    <button key={index + 1} onClick={() => cambiarPagina(index + 1)} className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}> {index + 1} </button>
                 ))}
-
-                <button 
-                    onClick={() => cambiarPagina(paginaActual + 1)}
-                    disabled={paginaActual === totalPaginas}
-                    className="pagination-btn"
-                >
-                    Siguiente <i className="fas fa-chevron-right"></i>
-                </button>
+                <button onClick={() => cambiarPagina(paginaActual + 1)} disabled={paginaActual === totalPaginas} className="pagination-btn"> Siguiente <i className="fas fa-chevron-right"></i> </button>
             </div>
         )}
-
       </main>
     </div>
   );

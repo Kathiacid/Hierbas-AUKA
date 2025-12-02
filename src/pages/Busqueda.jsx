@@ -1,80 +1,185 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { productApi } from '../api';
+import { Link } from 'react-router-dom';
+import { productApi } from '../api'; 
+import './Cosmetica.css'; 
 import { useCart } from '../components/CartContext';
-import './Busqueda.css';
 
-export default function Busqueda() {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('q');
+export default function Cosmetica() {
+  // 1. Obtenemos cartItems para verificar duplicados
+  const { addToCart, cartItems } = useCart(); 
+
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { addToCart, cartItems } = useCart();
+  const [filtroActivo, setFiltroActivo] = useState('Todo');
+  const [paginaActual, setPaginaActual] = useState(1);
+  const productosPorPagina = 12;
 
   useEffect(() => {
-    const realizarBusqueda = async () => {
+    const fetchCosmetica = async () => {
+      try {
         setLoading(true);
-        if (query) {
-            const data = await productApi.searchProducts(query);
-            const resultados = Array.isArray(data) ? data : (data.results || []);
-            setProductos(resultados);
-        }
+        const data = await productApi.getByCategory('cosmetica');
+        setProductos(data);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+      } finally {
         setLoading(false);
+      }
     };
-    realizarBusqueda();
-  }, [query]); 
 
-  if (loading) return <div style={{textAlign:'center', padding:'50px'}}>Buscando "{query}"...</div>;
+    fetchCosmetica();
+  }, []);
+
+  const productosFiltrados = filtroActivo === 'Todo' 
+    ? productos 
+    : productos.filter(p => {
+        const tipoProducto = p.tipo ? p.tipo.toLowerCase() : '';
+        const filtro = filtroActivo.toLowerCase();
+        return tipoProducto === filtro;
+      });
+
+  const indiceUltimoProducto = paginaActual * productosPorPagina;
+  const indicePrimerProducto = indiceUltimoProducto - productosPorPagina;
+  const productosVisibles = productosFiltrados.slice(indicePrimerProducto, indiceUltimoProducto);
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+
+  const handleFiltroClick = (filtro) => {
+    setFiltroActivo(filtro);
+    setPaginaActual(1);
+  };
+  const cambiarPagina = (numeroPagina) => {
+    setPaginaActual(numeroPagina);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (loading) return <div className="loading-container">Cargando...</div>;
 
   return (
-    <div className="catalogo-medicinal">
-        <div style={{textAlign:'center', margin:'30px 0'}}>
-            <h2>Resultados de búsqueda: "{query}"</h2>
-            <p>{productos.length} productos encontrados</p>
+    <div className="catalogo-cosmetica">
+      <div className='banner-container'>
+        <div className="banner-content">
+            <img 
+              src='https://sinsinsin-ecotienda.com/wp-content/uploads/2023/07/banner-cosmetica-natural-Tienda-NaturaLi.jpg' 
+              alt="Banner Cosmetica" 
+              className="banner-cosmetica"
+            />
         </div>
+      </div>
 
-        <div className="product-grid-medicinal">
-            {productos.length > 0 ? (
-                productos.map((producto) => {
-                    const yaEnCarrito = cartItems.some(item => item.id === producto.id);
-                    return (
-                        <div className="product-card" key={producto.id}>
-                            <div className="card-image-container">
-                                <img 
-                                    src={producto.img_prod} 
-                                    alt={producto.nombre_prod} 
-                                    className="card-image-fit"
-                                    onError={(e) => e.target.src = 'https://via.placeholder.com/300'}
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h3>
-                                    <Link to={`/producto/${producto.id}`} style={{color:'inherit', textDecoration:'none'}}>
-                                        {producto.nombre_prod}
-                                    </Link>
-                                </h3>
-                                <p className="beneficios">{producto.beneficio_prod}</p>
-                                <p className="price">${Number(producto.precio_prod).toLocaleString('es-CL')}</p>
-                                
-                                <button 
-                                    className="add-to-cart-btn"
-                                    disabled={!producto.stock || yaEnCarrito}
-                                    onClick={() => addToCart(producto)}
-                                >
-                                    <i className={yaEnCarrito ? "fas fa-check" : "fas fa-shopping-cart"}></i>
-                                    {!producto.stock ? ' Sin Stock' : yaEnCarrito ? ' Agregado' : ' Lo quiero'}
-                                </button>
-                            </div>
-                        </div>
-                    );
-                })
-            ) : (
-                <div style={{width:'100%', textAlign:'center'}}>
-                    <h3>No encontramos productos que coincidan con tu búsqueda.</h3>
-                    <Link to="/" style={{color:'#4CA54C'}}>Volver al inicio</Link>
+      <nav className="cosmetica-filter-bar">
+        {['Todo', 'Spray', 'Roll-on', 'Serum', 'Barra', 'Ungüento'].map(filtro => (
+          <button 
+            key={filtro}
+            onClick={() => handleFiltroClick(filtro)} 
+            className={filtroActivo === filtro ? 'active' : ''}
+          >
+            {filtro}
+          </button>
+        ))}
+      </nav>
+      
+      <div className="cosmetica-grid">
+        {productosVisibles.length > 0 ? (
+          productosVisibles.map((producto) => {
+            // 2. Calculamos si YA existe en el carrito
+            const yaEnCarrito = cartItems.some(item => item.id === producto.id);
+
+            return (
+                <div className="cosmetica-card" key={producto.id}>
+                  
+                  {producto.stock === false && <div className="cosmetica-offer-tag" style={{background:'red'}}>AGOTADO</div>}
+
+                  <div className="cosmetica-image-container">
+                      <img 
+                        src={producto.img_prod} 
+                        alt={producto.nombre_prod} 
+                        className="cosmetica-image"
+                        onError={(e) => { 
+                          e.target.onerror = null; 
+                          e.target.src = 'https://via.placeholder.com/300?text=Sin+Imagen'; 
+                        }} 
+                      />
+                  </div>
+
+                  <div className="cosmetica-info">
+                      <h3 className="cosmetica-name">
+                        <Link to={`/producto/${producto.id}`}>
+                            {producto.nombre_prod}
+                        </Link>
+                      </h3>
+
+                      <span style={{fontSize: '0.75rem', textTransform: 'uppercase', color: '#999', letterSpacing: '1px', display: 'block', marginBottom: '5px'}}>
+                        {producto.tipo_descripcion || producto.tipo}
+                      </span>
+
+                      <div className="cosmetica-beneficios-container">
+                        <p className="cosmetica-beneficios">
+                            <i className="fa-solid fa-sparkles"></i> {producto.beneficio_prod}
+                        </p>
+                      </div>
+
+                      <div className="cosmetica-prices">
+                        <p className="cosmetica-price">
+                          ${Number(producto.precio_prod).toLocaleString('es-CL')}
+                        </p>
+                      </div>
+                      
+                      {/* 3. Botón con lógica de bloqueo */}
+                      <button 
+                        className={`add-to-cart-btn ${yaEnCarrito ? 'btn-deshabilitado' : ''}`} 
+                        disabled={!producto.stock || yaEnCarrito} 
+                        style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
+                        onClick={() => addToCart(producto, 1)}
+                      >
+                        <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i> 
+                        
+                        {!producto.stock 
+                           ? ' Sin Stock' 
+                           : yaEnCarrito 
+                               ? ' Agregado' // O "En el carrito"
+                               : ' Agregar al carrito'}
+                      </button>
+                  </div>
                 </div>
-            )}
+            );
+          })
+        ) : (
+          <div className="no-products" style={{width: '100%', textAlign: 'center', padding: '40px'}}>
+            <h3>No hay productos de tipo "{filtroActivo}" disponibles.</h3>
+          </div>
+        )}
+      </div>
+
+      {productosFiltrados.length > productosPorPagina && (
+        <div className="pagination-container">
+            <button 
+                onClick={() => cambiarPagina(paginaActual - 1)}
+                disabled={paginaActual === 1}
+                className="pagination-btn"
+            >
+                Anterior
+            </button>
+
+            {Array.from({ length: totalPaginas }, (_, index) => (
+                <button
+                    key={index + 1}
+                    onClick={() => cambiarPagina(index + 1)}
+                    className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}
+                >
+                    {index + 1}
+                </button>
+            ))}
+
+            <button 
+                onClick={() => cambiarPagina(paginaActual + 1)}
+                disabled={paginaActual === totalPaginas}
+                className="pagination-btn"
+            >
+                Siguiente
+            </button>
         </div>
+        )}
+
     </div>
     );
 }
