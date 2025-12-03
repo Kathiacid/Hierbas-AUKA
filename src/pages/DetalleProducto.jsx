@@ -60,7 +60,6 @@ const DetalleProducto = () => {
       ? producto.categorias.map(c => c.nombre_cat).join(' / ')
       : producto.tipo;
 
-  // Lógica de Breadcrumbs
   let rutaCategoria = "/";       
   let nombreCategoria = "Productos"; 
   const infoParaRuta = (categoriaTexto + " " + (producto.tipo || "")).toLowerCase();
@@ -98,7 +97,6 @@ const DetalleProducto = () => {
           <p className="product-subtitle">{categoriaTexto}</p>
           
           <div className="product-price">
-            {/* CORRECCIÓN AQUÍ: Usamos las propiedades correctas del serializer */}
             {producto.tiene_descuento ? (
               <>
                 <span className="precio-antiguo" style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.9em', marginRight: '10px' }}>

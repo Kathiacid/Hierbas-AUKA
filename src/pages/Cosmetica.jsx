@@ -148,13 +148,13 @@ export default function Cosmetica() {
                         style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
                         onClick={() => addToCart(producto, 1)}
                       >
-                         {!producto.stock ? (
+                        {!producto.stock ? (
                             'Sin Stock'
-                         ) : yaEnCarrito ? (
+                        ) : yaEnCarrito ? (
                             <><i className="fas fa-check"></i> En el carrito</>
-                         ) : (
+                        ) : (
                             <><i className="fa-solid fa-cart-shopping"></i> Agregar</>
-                         )}
+                        )}
                       </button>
                   </div>
                 </div>
@@ -169,7 +169,6 @@ export default function Cosmetica() {
 
       {productosFiltrados.length > productosPorPagina && (
         <div className="pagination-container">
-            {/* ... Paginación igual ... */}
             <button onClick={() => cambiarPagina(paginaActual - 1)} disabled={paginaActual === 1} className="pagination-btn"> Anterior </button>
             {Array.from({ length: totalPaginas }, (_, index) => (
                 <button key={index + 1} onClick={() => cambiarPagina(index + 1)} className={`pagination-number ${paginaActual === index + 1 ? 'active' : ''}`}> {index + 1} </button>

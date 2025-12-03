@@ -25,7 +25,6 @@ export const CartProvider = ({ children }) => {
       if (itemIndex !== -1) {
         const newItems = [...prevItems];
         newItems[itemIndex].cantidad += quantity;
-        // Actualizamos precio oferta si cambió
         if (product.precio_actual) {
             newItems[itemIndex].precio_actual = product.precio_actual;
             newItems[itemIndex].tiene_descuento = product.tiene_descuento;
@@ -41,20 +40,18 @@ export const CartProvider = ({ children }) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // --- CÁLCULOS MATEMÁTICOS ---
 
-  // 1. Total Real a Pagar (Usando precio oferta si existe)
   const cartTotal = cartItems.reduce((acc, item) => {
       const precioFinal = item.precio_actual ? Number(item.precio_actual) : Number(item.precio_prod);
       return acc + (precioFinal * item.cantidad);
   }, 0);
 
-  // 2. Total "Original" (Como si no hubiera ofertas)
+
   const totalSinDescuento = cartItems.reduce((acc, item) => {
       return acc + (Number(item.precio_prod) * item.cantidad);
   }, 0);
 
-  // 3. Ahorro Total
+
   const totalAhorro = totalSinDescuento - cartTotal;
 
   return (
@@ -62,9 +59,9 @@ export const CartProvider = ({ children }) => {
         cartItems, 
         addToCart, 
         removeFromCart, 
-        cartTotal,       // Lo que paga el cliente
-        totalAhorro,     // Cuanto se ahorra
-        totalSinDescuento // El precio tachado total (opcional)
+        cartTotal,     
+        totalAhorro,    
+        totalSinDescuento 
     }}>
       {children}
     </CartContext.Provider>

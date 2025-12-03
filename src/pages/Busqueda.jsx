@@ -5,7 +5,6 @@ import './Cosmetica.css';
 import { useCart } from '../components/CartContext';
 
 export default function Cosmetica() {
-  // 1. Obtenemos cartItems para verificar duplicados
   const { addToCart, cartItems } = useCart(); 
 
   const [productos, setProductos] = useState([]);
@@ -81,7 +80,7 @@ export default function Cosmetica() {
       <div className="cosmetica-grid">
         {productosVisibles.length > 0 ? (
           productosVisibles.map((producto) => {
-            // 2. Calculamos si YA existe en el carrito
+
             const yaEnCarrito = cartItems.some(item => item.id === producto.id);
 
             return (
@@ -123,9 +122,7 @@ export default function Cosmetica() {
                           ${Number(producto.precio_prod).toLocaleString('es-CL')}
                         </p>
                       </div>
-                      
-                      {/* 3. Botón con lógica de bloqueo */}
-                      <button 
+                  <button 
                         className={`add-to-cart-btn ${yaEnCarrito ? 'btn-deshabilitado' : ''}`} 
                         disabled={!producto.stock || yaEnCarrito} 
                         style={{ opacity: (!producto.stock || yaEnCarrito) ? 0.6 : 1 }}
@@ -134,10 +131,10 @@ export default function Cosmetica() {
                         <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i> 
                         
                         {!producto.stock 
-                           ? ' Sin Stock' 
-                           : yaEnCarrito 
-                               ? ' Agregado' // O "En el carrito"
-                               : ' Agregar al carrito'}
+                          ? ' Sin Stock' 
+                          : yaEnCarrito 
+                              ? ' Agregado'
+                              : ' Agregar al carrito'}
                       </button>
                   </div>
                 </div>

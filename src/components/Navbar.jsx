@@ -4,7 +4,6 @@ import { useCart } from './CartContext';
 import './Navbar.css';
 
 export default function Navbar() {
-  // Traemos los nuevos valores del contexto
   const { cartItems, removeFromCart, cartTotal, totalAhorro } = useCart(); 
   
   const [isCartOpen, setIsCartOpen] = useState(false); 
@@ -14,12 +13,10 @@ export default function Navbar() {
   const handleConsultarStock = () => {
     const hora = new Date().getHours();
     const saludo = hora >= 6 && hora < 20 ? "Buenos días ☀️" : "Buenas noches 🌙";
-    
-    // Generamos la lista para WhatsApp con detalles de oferta
+  
     const listaProductos = cartItems.map(item => {
         const cantidadStr = item.cantidad > 1 ? ` (x${item.cantidad})` : '';
-        
-        // Determinamos qué precio mostrar en el mensaje
+
         let precioTexto = "";
         let precioUnitario = 0;
 
@@ -36,7 +33,6 @@ export default function Navbar() {
         return `🌱 *${item.nombre_prod}*${cantidadStr}\n   Valor un.: ${precioTexto}\n   Subtotal: $${subtotal.toLocaleString('es-CL')}`;
     }).join('\n\n');
 
-    // Construimos el mensaje final con el ahorro
     let resumenEconomico = `💰 *Total a pagar:* $${cartTotal.toLocaleString('es-CL')}`;
     
     if (totalAhorro > 0) {
@@ -122,7 +118,7 @@ export default function Navbar() {
               <>
                 <ul className="cart-items-list">
                   {cartItems.map((item, index) => {
-                    // Calculamos precio a mostrar en la lista visual
+
                     const precioFinal = item.tiene_descuento ? item.precio_actual : item.precio_prod;
                     
                     return (
@@ -162,19 +158,18 @@ export default function Navbar() {
                   })}
                 </ul>
                 
-                {/* RESUMEN DE TOTALES EN EL DROPDOWN */}
                 <div className="cart-total-preview">
-                     <div style={{display:'flex', justifyContent:'space-between', fontWeight:'bold', fontSize:'1.1rem'}}>
+                    <div style={{display:'flex', justifyContent:'space-between', fontWeight:'bold', fontSize:'1.1rem'}}>
                         <span>Total:</span>
                         <span>${cartTotal.toLocaleString('es-CL')}</span>
-                     </div>
-                     
-                     {totalAhorro > 0 && (
-                         <div style={{display:'flex', justifyContent:'space-between', color:'#e74c3c', fontSize:'0.9rem', marginTop:'5px'}}>
+                    </div>
+                    
+                    {totalAhorro > 0 && (
+                        <div style={{display:'flex', justifyContent:'space-between', color:'#e74c3c', fontSize:'0.9rem', marginTop:'5px'}}>
                             <span>¡Estás ahorrando!</span>
                             <span>- ${totalAhorro.toLocaleString('es-CL')}</span>
-                         </div>
-                     )}
+                        </div>
+                    )}
                 </div>
 
                 <button className="btn-whatsapp-consultar" onClick={handleConsultarStock}>
