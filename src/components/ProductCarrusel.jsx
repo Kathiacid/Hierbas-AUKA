@@ -26,7 +26,9 @@ const ProductCarousel = () => {
                         id: p.id,
                         nombre: p.nombre_prod || "Producto sin nombre",
                         imagen: p.img_prod || "https://via.placeholder.com/300?text=Sin+Imagen",
+                        // Mapeamos el beneficio y el tipo para que coincida con la tarjeta Medicinal
                         descripcion: p.beneficio_prod || p.descripcion_prod || "Sin descripción",
+                        tipo: p.tipo_descripcion || p.tipo || "Producto", 
                         precio: precioFinal,
                         old_price: esOferta ? precioOriginal : null,
                         stock: p.stock ?? true,
@@ -62,45 +64,66 @@ const ProductCarousel = () => {
 
                         return (
                             <div key={product.id} className="product-card">
-                                {product.offer && <div className="offer-tag">OFERTA</div>}
+                                
+                                {/* --- BADGES (IGUAL QUE MEDICINAL) --- */}
+                                <div className="card-image-container">
+                                    {!product.stock ? (
+                                        <span className="badge agotado" style={{backgroundColor: '#e74c3c', color: 'white', padding: '5px 10px', borderRadius: '5px', position: 'absolute', top: '10px', right: '10px', zIndex: 10, fontSize: '0.8rem'}}>
+                                            Agotado
+                                        </span>
+                                    ) : product.offer ? (
+                                        <span className="badge oferta" style={{backgroundColor: '#d9822b', color: 'white', padding: '5px 10px', borderRadius: '5px', position: 'absolute', top: '10px', right: '10px', zIndex: 10, fontSize: '0.8rem'}}>
+                                            OFERTA
+                                        </span>
+                                    ) : null}
 
-                                <div className="product-image-container">
                                     <img
                                         src={product.imagen}
                                         alt={product.nombre}
-                                        className="product-image"
-                                        onError={(e) => e.target.src = 'https://via.placeholder.com/300'}
+                                        className="card-image-fit"
+                                        onError={(e) => {
+                                            e.target.onerror = null; 
+                                            e.target.src = 'https://via.placeholder.com/300?text=Sin+Imagen';
+                                        }}
                                     />
                                 </div>
 
-                                <div className="product-info">
-                                    <div>
-                                        <h3 className="product-name">
-                                            <Link to={`/producto/${product.id}`}>
-                                                {product.nombre}
-                                            </Link>
-                                        </h3>
-                                        <p className="product-description">
-                                            {product.descripcion}
-                                        </p>
-                                    </div>
+                                <div className="card-body">
+                                    <h3>
+                                        <Link to={`/producto/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            {product.nombre}
+                                        </Link>
+                                    </h3>
+                                    
+                                    <span style={{fontSize: '0.8rem', textTransform: 'uppercase', color: '#888', letterSpacing: '1px'}}>
+                                        {product.tipo}
+                                    </span>
 
-                                    <div>
-                                        <div className="prices">
-                                            <p className="product-price">
-                                                ${product.precio.toLocaleString('es-CL')}
-                                            </p>
-                                            {product.old_price && (
-                                                <p className="old-price">
-                                                    ${product.old_price.toLocaleString('es-CL')}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
+                                    <p className="beneficios" style={{ fontSize: '0.9em', color: '#666', margin: '5px 0' }}>
+                                        {product.descripcion}
+                                    </p>
+
+                                    <p className="price">
+                                        {product.offer ? (
+                                            <>
+                                                <span className="precio-antiguo" style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.9em', marginRight: '10px' }}>
+                                                    ${Number(product.old_price).toLocaleString('es-CL')}
+                                                </span>
+                                                <span className="precio-nuevo" style={{ color: '#e74c3c', fontWeight: 'bold', fontSize: '1.2em' }}>
+                                                    ${Number(product.precio).toLocaleString('es-CL')}
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <span className="precio-normal" style={{ color: '#4CA54C', fontWeight: 'bold', fontSize: '1.2em' }}>
+                                                ${Number(product.precio).toLocaleString('es-CL')}
+                                            </span>
+                                        )}
+                                    </p>
 
                                     <button 
-                                        className="add-to-cart-btn"
+                                        className={`add-to-cart-btn ${yaEnCarrito ? 'btn-deshabilitado' : ''}`}
                                         disabled={!product.stock || yaEnCarrito}
+                                        style={{ opacity: (!product.stock || yaEnCarrito) ? 0.6 : 1 }}
                                         onClick={() => addToCart({
                                             id: product.id,
                                             nombre_prod: product.nombre,
@@ -110,8 +133,13 @@ const ProductCarousel = () => {
                                             tipo: 'Destacado'
                                         })}
                                     >
-                                        <i className={yaEnCarrito ? "fas fa-check" : "fa-solid fa-cart-shopping"}></i>
-                                        { !product.stock ? ' Sin Stock' : yaEnCarrito ? ' Agregado' : ' Añadir al Carrito' }
+                                        {!product.stock ? (
+                                            'Sin Stock'
+                                        ) : yaEnCarrito ? (
+                                            <><i className="fas fa-check"></i> En el carrito</>
+                                        ) : (
+                                            <><i className="fa-solid fa-cart-shopping"></i> Agregar</>
+                                        )}
                                     </button>
                                 </div>
                             </div>

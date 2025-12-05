@@ -40,17 +40,18 @@ export const CartProvider = ({ children }) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   const cartTotal = cartItems.reduce((acc, item) => {
       const precioFinal = item.precio_actual ? Number(item.precio_actual) : Number(item.precio_prod);
       return acc + (precioFinal * item.cantidad);
   }, 0);
 
-
   const totalSinDescuento = cartItems.reduce((acc, item) => {
       return acc + (Number(item.precio_prod) * item.cantidad);
   }, 0);
-
 
   const totalAhorro = totalSinDescuento - cartTotal;
 
@@ -59,6 +60,7 @@ export const CartProvider = ({ children }) => {
         cartItems, 
         addToCart, 
         removeFromCart, 
+        clearCart,
         cartTotal,     
         totalAhorro,    
         totalSinDescuento 

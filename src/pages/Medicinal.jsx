@@ -165,7 +165,13 @@ export default function Medicinal() {
             })
           ) : (
             <div style={{width: '100%', textAlign: 'center', padding: '40px', color: '#666'}}>
-                <h3>No hay productos de tipo "{filtroActivo}" disponibles por el momento.</h3>
+                <h3>No hay productos de tipo {filtroActivo} en esta categoría.</h3>
+              <button 
+                onClick={() => setFiltroActivo('Todo')} 
+                style={{marginTop: '10px', cursor: 'pointer', color: '#5a8a66', background:'none', border:'none', textDecoration:'underline'}}
+              >
+                Ver todos los productos
+              </button>
             </div>
           )}
         </div>
